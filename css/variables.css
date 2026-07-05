@@ -1,0 +1,134 @@
+/* ============================================
+   URBANFLOW WORKS — Design Tokens
+   All design decisions in one place.
+   ============================================ */
+
+:root {
+  /* ── Colors ── */
+  --color-primary:       #1e3a5f;
+  --color-primary-light:  #2a5298;
+  --color-primary-dark:   #142849;
+  --color-primary-50:     #eef2ff;
+
+  --color-teal:          #0d9488;
+  --color-teal-light:    #14b8a6;
+  --color-teal-dark:     #0f766e;
+  --color-teal-50:       #f0fdfa;
+
+  --color-gold:          #c8a951;
+  --color-gold-light:    #d4bc6a;
+
+  --color-bg:            #ffffff;
+  --color-surface:       #f8f9fc;
+  --color-surface-alt:   #f1f3f8;
+  --color-border:        #e2e8f0;
+  --color-border-light:  #f1f5f9;
+
+  --color-text:          #1a1a2e;
+  --color-text-secondary:#64748b;
+  --color-text-muted:    #94a3b8;
+  --color-text-inverse:  #ffffff;
+
+  --color-dark:          #0f172a;
+  --color-dark-light:    #1e293b;
+
+  --color-success:       #10b981;
+  --color-error:         #ef4444;
+
+  /* ── Typography ── */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --fs-xs:   0.75rem;   /* 12px */
+  --fs-sm:   0.875rem;  /* 14px */
+  --fs-base: 1rem;      /* 16px */
+  --fs-lg:   1.125rem;  /* 18px */
+  --fs-xl:   1.25rem;   /* 20px */
+  --fs-2xl:  1.5rem;    /* 24px */
+  --fs-3xl:  1.875rem;  /* 30px */
+  --fs-4xl:  2.25rem;   /* 36px */
+  --fs-5xl:  3rem;      /* 48px */
+  --fs-6xl:  3.75rem;   /* 60px */
+  --fs-hero: clamp(2.75rem, 5vw + 1rem, 4.5rem);
+
+  --fw-normal:    400;
+  --fw-medium:    500;
+  --fw-semibold:  600;
+  --fw-bold:      700;
+  --fw-extrabold: 800;
+
+  --lh-tight:   1.1;
+  --lh-snug:    1.25;
+  --lh-normal:  1.6;
+  --lh-relaxed: 1.75;
+
+  --ls-tight:  -0.025em;
+  --ls-normal:  0;
+  --ls-wide:    0.05em;
+  --ls-wider:   0.1em;
+
+  /* ── Spacing scale ── */
+  --sp-1:  0.25rem;
+  --sp-2:  0.5rem;
+  --sp-3:  0.75rem;
+  --sp-4:  1rem;
+  --sp-5:  1.25rem;
+  --sp-6:  1.5rem;
+  --sp-8:  2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --sp-20: 5rem;
+  --sp-24: 6rem;
+  --sp-32: 8rem;
+
+  /* ── Layout ── */
+  --container-max:     1200px;
+  --container-narrow:  800px;
+  --container-wide:    1400px;
+  --container-padding: 1.5rem;
+  --navbar-height:     72px;
+
+  /* ── Shadows ── */
+  --shadow-xs:  0 1px 2px rgba(0,0,0,0.04);
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:  0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.04);
+  --shadow-lg:  0 10px 15px -3px rgba(0,0,0,0.07), 0 4px 6px -4px rgba(0,0,0,0.03);
+  --shadow-xl:  0 20px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.03);
+  --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.15);
+  --shadow-card:       0 1px 3px rgba(0,0,0,0.04), 0 6px 16px rgba(0,0,0,0.04);
+  --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.06), 0 16px 32px rgba(0,0,0,0.08);
+  --shadow-navbar:     0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.04);
+
+  /* ── Radii ── */
+  --radius-sm:   0.375rem;
+  --radius-md:   0.5rem;
+  --radius-lg:   0.75rem;
+  --radius-xl:   1rem;
+  --radius-2xl:  1.25rem;
+  --radius-3xl:  1.5rem;
+  --radius-full: 9999px;
+
+  /* ── Transitions ── */
+  --ease-out:    cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --tr-fast:  150ms var(--ease-out);
+  --tr-base:  250ms var(--ease-out);
+  --tr-slow:  400ms var(--ease-out);
+
+  /* ── Z-index ── */
+  --z-base:    1;
+  --z-sticky:  100;
+  --z-navbar:  1000;
+  --z-overlay: 1100;
+  --z-modal:   1200;
+  --z-toast:   1300;
+
+  /* ── Gradients ── */
+  --grad-primary:  linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  --grad-teal:     linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-light) 100%);
+  --grad-hero:     linear-gradient(160deg, #f8f9fc 0%, #eef2ff 40%, #f0fdfa 100%);
+  --grad-text:     linear-gradient(135deg, var(--color-primary) 30%, var(--color-teal) 100%);
+  --grad-cta:      linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, #1a4a6e 100%);
+  --grad-card:     linear-gradient(135deg, rgba(30,58,95,0.02) 0%, rgba(13,148,136,0.02) 100%);
+  --grad-border:   linear-gradient(135deg, var(--color-primary-light), var(--color-teal));
+}
