@@ -40,42 +40,6 @@
     }, duration);
   }
 
-  /* ── Contact form ── */
-  var contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      var name    = contactForm.querySelector('#contact-name');
-      var email   = contactForm.querySelector('#contact-email');
-      var subject = contactForm.querySelector('#contact-subject');
-      var message = contactForm.querySelector('#contact-message');
-
-      // Basic validation
-      if (!name.value.trim() || !email.value.trim() || !message.value.trim()) {
-        showToast('Please fill in all required fields.');
-        return;
-      }
-
-      // Simple email validation
-      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailPattern.test(email.value)) {
-        showToast('Please enter a valid email address.');
-        return;
-      }
-
-      // Build mailto link
-      var subjectText = subject ? subject.value : 'Website Contact';
-      var body = 'Name: ' + name.value + '\n\n' + message.value;
-      var mailtoLink = 'mailto:contact@urbanflowworks.com'
-        + '?subject=' + encodeURIComponent(subjectText)
-        + '&body=' + encodeURIComponent(body);
-
-      window.location.href = mailtoLink;
-      showToast('Opening your email client...');
-      contactForm.reset();
-    });
-  }
 
   /* ── Account deletion form ── */
   var deletionForm = document.getElementById('deletion-form');
