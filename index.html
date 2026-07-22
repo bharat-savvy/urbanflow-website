@@ -487,14 +487,15 @@
                     </div>
                 </div>
                 <div class="audit-form-box reveal--right">
-                    <form onsubmit="event.preventDefault(); submitAuditForm();">
+                    <form id="auditForm">
+                        <input type="text" name="_honeypot" style="display:none !important" tabindex="-1" autocomplete="off">
                         <div class="audit-group">
-                            <label>Your Website URL</label>
-                            <input type="url" class="audit-input" placeholder="https://yourwebsite.com" required>
+                            <label for="audit-url">Your Website URL</label>
+                            <input type="url" id="audit-url" class="audit-input" placeholder="https://yourwebsite.com" required>
                         </div>
                         <div class="audit-group">
-                            <label>Where should we send the video?</label>
-                            <input type="email" class="audit-input" placeholder="founder@company.com" required>
+                            <label for="audit-email">Where should we send the video?</label>
+                            <input type="email" id="audit-email" class="audit-input" placeholder="founder@company.com" required>
                         </div>
                         <button type="submit" class="audit-btn" id="auditBtn">Get My Free Audit</button>
                     </form>
@@ -582,9 +583,9 @@
                 Hey there! 👋 Do you have any questions about our Website or App packages?
             </div>
             
-            <form id="chatForm" class="chat-form" onsubmit="event.preventDefault(); submitChat();">
-                <input type="email" class="chat-input" placeholder="Your email address" required>
-                <textarea class="chat-textarea" placeholder="Type your message..." required></textarea>
+            <form id="chatForm" class="chat-form">
+                <input type="email" id="chat-email" class="chat-input" placeholder="Your email address" required>
+                <textarea id="chat-message" class="chat-textarea" placeholder="Type your message..." required></textarea>
                 <button type="submit" class="chat-btn" id="chatBtn">Send Message</button>
             </form>
             <p style="font-size: 11px; color: #94a3b8; text-align: center; margin-top: 12px;">We usually reply within a few hours.</p>
@@ -593,30 +594,14 @@
 
     <script src="js/navbar.js" defer></script>
     <script src="js/animations.js" defer></script>
+    <script src="js/forms.js" defer></script>
     <script>
-        // Form & Chat Scripts preserved
-        function submitAuditForm() {
-            const btn = document.getElementById('auditBtn');
-            btn.innerHTML = 'Analyzing...';
-            setTimeout(() => {
-                btn.classList.add('success');
-                btn.innerHTML = 'Success! Check your email soon.';
-            }, 1200);
-        }
         function toggleChat() {
             const win = document.getElementById('chatWindow');
             const fab = document.getElementById('chatFab');
             win.classList.toggle('open');
             const badge = fab.querySelector('.chat-badge');
             if(badge) badge.style.display = 'none';
-        }
-        function submitChat() {
-            const btn = document.getElementById('chatBtn');
-            btn.innerHTML = 'Sending...';
-            setTimeout(() => {
-                btn.classList.add('sent');
-                btn.innerHTML = 'Message Sent! ✓';
-            }, 1000);
         }
     </script>
 </body>

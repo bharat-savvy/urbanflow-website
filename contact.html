@@ -158,14 +158,16 @@
                 
                 <!-- The Form -->
                 <div class="discovery-form reveal--scale">
-                    <form onsubmit="event.preventDefault(); submitDiscovery();">
+                    <form id="discoveryForm">
+                        <!-- Honeypot spam protection (hidden from real users) -->
+                        <input type="text" name="_honeypot" style="display:none !important" tabindex="-1" autocomplete="off">
                         <div class="form-group">
-                            <label class="form-label">Full Name</label>
-                            <input type="text" class="form-input" placeholder="e.g. John Doe" required>
+                            <label class="form-label" for="disc-name">Full Name</label>
+                            <input type="text" id="disc-name" class="form-input" placeholder="e.g. John Doe" required>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Email Address</label>
-                            <input type="email" class="form-input" placeholder="john@company.com" required>
+                            <label class="form-label" for="disc-email">Email Address</label>
+                            <input type="email" id="disc-email" class="form-input" placeholder="john@company.com" required>
                         </div>
                         
                         <div class="form-group">
@@ -186,8 +188,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Project Details</label>
-                            <textarea class="form-input" style="height: 120px; resize: none;" placeholder="Tell us briefly what this software needs to do..." required></textarea>
+                            <label class="form-label" for="disc-details">Project Details</label>
+                            <textarea id="disc-details" class="form-input" style="height: 120px; resize: none;" placeholder="Tell us briefly what this software needs to do..." required></textarea>
                         </div>
 
                         <button type="submit" class="submit-btn" id="discoveryBtn">Submit Project Request</button>
@@ -229,7 +231,7 @@
                         <div class="time-slot" onclick="selectTime(this)">4:15 PM</div>
                     </div>
                     
-                    <button id="confirmBtn" class="submit-btn" style="display: none; margin-top: var(--sp-6);" onclick="confirmCall()">Confirm Booking</button>
+                    <button id="confirmBtn" class="submit-btn" style="display: none; margin-top: var(--sp-6);">Confirm Booking</button>
 
                     <div class="direct-info">
                         <div class="direct-row">
@@ -309,49 +311,21 @@
 
     <script src="js/navbar.js" defer></script>
     <script src="js/animations.js" defer></script>
+    <script src="js/forms.js" defer></script>
     <script>
-        function submitDiscovery() {
-            const btn = document.getElementById('discoveryBtn');
-            btn.innerHTML = 'Submitting...';
-            setTimeout(() => {
-                btn.classList.add('success');
-                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;vertical-align:middle;margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg> Request Received!';
-            }, 1200);
-        }
-
-        let selectedDay = null;
-        let selectedSlot = null;
-
+        // Calendar UI interactivity (selection only — submission handled by forms.js)
         function selectDate(el) {
-            // Remove active from all days
             document.querySelectorAll('.cal-day').forEach(d => d.classList.remove('active'));
-            // Add active to clicked
             el.classList.add('active');
-            selectedDay = el;
-            
-            // Show time slots
             document.getElementById('timeSlots').classList.add('show');
-            
-            // Reset time slots
             document.querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected'));
-            selectedSlot = null;
             document.getElementById('confirmBtn').style.display = 'none';
         }
 
         function selectTime(el) {
             document.querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected'));
             el.classList.add('selected');
-            selectedSlot = el;
             document.getElementById('confirmBtn').style.display = 'block';
-        }
-
-        function confirmCall() {
-            const btn = document.getElementById('confirmBtn');
-            btn.innerHTML = 'Booking...';
-            setTimeout(() => {
-                btn.classList.add('success');
-                btn.innerHTML = 'Call Booked! ✓ Check Email';
-            }, 1000);
         }
     </script>
 </body>

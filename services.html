@@ -545,8 +545,8 @@
                         <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: var(--sp-6);">
                             <div style="font-weight: var(--fw-bold); margin-bottom: var(--sp-2);">Lock in this price + 10% Off</div>
                             <p style="font-size: 13px; color: #94a3b8; line-height:1.4;">Enter your email to receive a detailed PDF proposal and your discount code.</p>
-                            <form class="calc-form" onsubmit="event.preventDefault(); alert('Proposal sent successfully! Check your email.');">
-                                <input type="email" class="calc-input" placeholder="Your work email..." required>
+                            <form id="proposalForm" class="calc-form">
+                                <input type="email" id="proposal-email" class="calc-input" placeholder="Your work email..." required>
                                 <button type="submit" class="calc-submit">Get Detailed Proposal</button>
                             </form>
                         </div>
@@ -645,9 +645,9 @@
                 Hey there! 👋 Do you have any questions about our Website or App packages?
             </div>
             
-            <form id="chatForm" class="chat-form" onsubmit="event.preventDefault(); submitChat();">
-                <input type="email" class="chat-input" placeholder="Your email address" required>
-                <textarea class="chat-textarea" placeholder="Type your message..." required></textarea>
+            <form id="chatForm" class="chat-form">
+                <input type="email" id="chat-email" class="chat-input" placeholder="Your email address" required>
+                <textarea id="chat-message" class="chat-textarea" placeholder="Type your message..." required></textarea>
                 <button type="submit" class="chat-btn" id="chatBtn">Send Message</button>
             </form>
             <p style="font-size: 11px; color: var(--color-text-muted); text-align: center; margin-top: 12px;">We usually reply within a few hours.</p>
@@ -657,6 +657,7 @@
     <script src="js/navbar.js" defer></script>
     <script src="js/animations.js" defer></script>
     <script src="js/script.js" defer></script>
+    <script src="js/forms.js" defer></script>
     <script>
         // Currency Switcher Logic
         document.addEventListener('DOMContentLoaded', () => {
@@ -759,16 +760,6 @@
             // Hide badge once opened
             const badge = fab.querySelector('.chat-badge');
             if(badge) badge.style.display = 'none';
-        }
-
-        function submitChat() {
-            const btn = document.getElementById('chatBtn');
-            btn.innerHTML = 'Sending...';
-            
-            setTimeout(() => {
-                btn.classList.add('sent');
-                btn.innerHTML = 'Message Sent! ✓';
-            }, 1000);
         }
     </script>
 </body>
