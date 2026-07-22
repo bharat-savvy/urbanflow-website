@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Precision Plumbing Engineering</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "inverse-surface": "#303032",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#003ea8",
+                    "tertiary-fixed": "#ffdbca",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#f3f0f2",
+                    "surface": "#fcf8fa",
+                    "error": "#ba1a1a",
+                    "outline": "#76777d",
+                    "surface-container-low": "#f6f3f5",
+                    "secondary": "#0051d5",
+                    "on-tertiary-container": "#d95f00",
+                    "on-surface": "#1b1b1d",
+                    "surface-variant": "#e4e2e4",
+                    "on-tertiary-fixed": "#341100",
+                    "on-secondary-fixed": "#00174b",
+                    "surface-container-high": "#eae7e9",
+                    "on-primary-fixed": "#131b2e",
+                    "primary": "#000000",
+                    "primary-fixed-dim": "#bec6e0",
+                    "surface-tint": "#565e74",
+                    "tertiary-fixed-dim": "#ffb690",
+                    "primary-fixed": "#dae2fd",
+                    "outline-variant": "#c6c6cd",
+                    "on-error": "#ffffff",
+                    "primary-container": "#131b2e",
+                    "on-tertiary": "#ffffff",
+                    "surface-dim": "#dcd9db",
+                    "secondary-fixed": "#dbe1ff",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed-dim": "#b4c5ff",
+                    "surface-container-highest": "#e4e2e4",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "secondary-container": "#316bf3",
+                    "tertiary": "#000000",
+                    "surface-container": "#f0edef",
+                    "on-background": "#1b1b1d",
+                    "inverse-primary": "#bec6e0",
+                    "on-surface-variant": "#45464d",
+                    "surface-bright": "#fcf8fa",
+                    "tertiary-container": "#341100",
+                    "background": "#fcf8fa",
+                    "on-primary-container": "#7c839b",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#783200",
+                    "accent-blue": "#2563EB",
+                    "accent-orange": "#F97316"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "1rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "gutter": "24px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "64px",
+                    "stack-xl": "80px",
+                    "stack-md": "32px",
+                    "stack-sm": "16px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Geist"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Geist"],
+                    "headline-lg": ["Geist"],
+                    "label-sm": ["Geist"]
+            },
+            "fontSize": {
+                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0", "fontWeight": "400"}],
+                    "display-lg": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #FAFAFA;
+            color: #0F172A;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .gradient-blur {
+            position: absolute;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.05;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden font-body-md text-body-md">
+<!-- Background Decoration -->
+<div class="gradient-blur bg-accent-blue w-[500px] h-[500px] top-[-250px] right-[-250px] rounded-full"></div>
+<div class="gradient-blur bg-accent-orange w-[400px] h-[400px] bottom-[10%] left-[-200px] rounded-full"></div>
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm h-20">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop h-full">
+<div class="font-headline-lg text-headline-lg tracking-tighter text-primary"><span class="brand-name">AQUAFLOW</span></div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-body-md text-body-md text-secondary font-semibold border-b-2 border-secondary hover:text-secondary transition-colors" href="#">Services</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Technology</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Portfolio</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors" href="#">About</a>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-full font-label-sm text-label-sm scale-95 active:scale-90 transition-transform duration-200">Get Started</button>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative min-h-[90vh] flex items-center px-margin-desktop max-w-container-max mx-auto py-stack-xl">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center w-full">
+<div class="reveal-up active">
+<div class="inline-block bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full text-label-sm mb-6">NEXT-GEN PLUMBING</div>
+<h1 class="font-display-lg text-display-lg mb-8 leading-[1.1]">
+                        Reliable Plumbing. <span class="text-accent-blue">Designed</span> for Modern Homes.
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-10">
+                        Expert engineering meets residential luxury. Precision services for the most demanding properties. We redefine reliability through technical excellence.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-xl font-label-sm text-label-sm hover:opacity-90 transition-opacity">Get Started</button>
+<button class="bg-transparent border border-outline-variant text-primary px-8 py-4 rounded-xl font-label-sm text-label-sm hover:bg-surface-variant transition-colors">View Services</button>
+</div>
+</div>
+<div class="relative h-[500px] flex justify-center items-center">
+<div class="absolute inset-0 bg-accent-blue/5 rounded-[40px] rotate-3 -z-10"></div>
+<div class="absolute inset-0 glass-panel rounded-[40px] -rotate-3 -z-10 shadow-lg"></div>
+<!-- STITCH_SVG_START:ANIMATION_2 class="w-full h-full max-h-[400px] animate-float" --><div class="w-full h-full max-h-[400px] animate-float" id="animated-svg-ANIMATION_2" style="display:block;"><svg fill="none" height="600" viewbox="0 0 600 600" width="600" xmlns="http://www.w3.org/2000/svg">
+<!-- Abstract Plumbing Illustration -->
+<defs>
+<lineargradient id="pipe_grad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#0F172A"></stop>
+<stop offset="100%" stop-color="#2563EB"></stop>
+</lineargradient>
+<filter height="140%" id="blur_glow" width="140%" x="-20%" y="-20%">
+<fegaussianblur result="blur" stddeviation="15"></fegaussianblur>
+</filter>
+</defs>
+<!-- Background Glow -->
+<circle cx="300" cy="300" fill="#2563EB" fill-opacity="0.05" filter="url(#blur_glow)" r="150"></circle>
+<!-- Abstract Pipe Geometry -->
+<path d="M100 300 H250 V150 H350 V450 H500" stroke="url(#pipe_grad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+<path d="M250 250 H350" stroke="#F97316" stroke-linecap="round" stroke-width="12"></path>
+<!-- Circles/Valves -->
+<circle cx="250" cy="300" fill="#F97316" r="16"></circle>
+<circle cx="350" cy="150" fill="#FAFAFA" r="20" stroke="#0F172A" stroke-width="4"></circle>
+<circle cx="350" cy="450" fill="#2563EB" r="16"></circle>
+<!-- Water Drops / Flow -->
+<circle cx="450" cy="450" fill="#2563EB" opacity="0.6" r="6">
+<animate attributename="opacity" dur="3s" repeatcount="indefinite" values="0.2;0.6;0.2"></animate>
+</circle>
+<circle cx="480" cy="450" fill="#2563EB" opacity="0.4" r="4"></circle>
+<!-- Abstract Accents -->
+<rect fill="#0F172A" height="8" opacity="0.2" rx="4" width="40" x="150" y="280"></rect>
+<rect fill="#2563EB" height="6" opacity="0.2" rx="3" width="30" x="410" y="440"></rect>
+</svg></div><!-- STITCH_SVG_END:ANIMATION_2 -->
+</div>
+</div>
+</section>
+<!-- Trust Badges -->
+<section class="bg-surface-container-low py-12">
+<div class="max-w-container-max mx-auto px-margin-desktop flex flex-wrap justify-center md:justify-between items-center gap-8 opacity-60">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-sm text-label-sm tracking-widest uppercase">Licensed Professionals</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">emergency</span>
+<span class="font-label-sm text-label-sm tracking-widest uppercase">24/7 Emergency</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="font-label-sm text-label-sm tracking-widest uppercase">Same Day Service</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+<span class="font-label-sm text-label-sm tracking-widest uppercase">Fully Insured</span>
+</div>
+</div>
+</section>
+<!-- Statistics -->
+<section class="py-stack-xl px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-gutter text-center">
+<div class="p-8 glass-panel rounded-2xl">
+<div class="font-display-lg text-4xl lg:text-5xl text-accent-blue mb-2">15k+</div>
+<div class="text-on-surface-variant font-label-sm">Homes Served</div>
+</div>
+<div class="p-8 glass-panel rounded-2xl">
+<div class="font-display-lg text-4xl lg:text-5xl text-accent-orange mb-2">99%</div>
+<div class="text-on-surface-variant font-label-sm">Uptime Rate</div>
+</div>
+<div class="p-8 glass-panel rounded-2xl">
+<div class="font-display-lg text-4xl lg:text-5xl text-primary mb-2">24h</div>
+<div class="text-on-surface-variant font-label-sm">Response Time</div>
+</div>
+<div class="p-8 glass-panel rounded-2xl">
+<div class="font-display-lg text-4xl lg:text-5xl text-accent-blue mb-2">4.9/5</div>
+<div class="text-on-surface-variant font-label-sm">Client Rating</div>
+</div>
+</div>
+</section>
+<!-- Services -->
+<section class="py-stack-xl bg-white">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="mb-16 reveal-up">
+<h2 class="font-headline-lg text-headline-lg mb-4">Masterclass Services</h2>
+<p class="text-on-surface-variant max-w-2xl">Engineered solutions for every plumbing challenge, utilizing the latest in diagnostic technology and sustainable practices.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Service 1 -->
+<div class="p-8 border border-outline-variant rounded-2xl hover:border-accent-blue transition-all group reveal-up">
+<div class="w-12 h-12 bg-surface-container mb-6 flex items-center justify-center rounded-xl group-hover:bg-accent-blue/10 transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-accent-blue" data-icon="leak_add">leak_add</span>
+</div>
+<h3 class="font-headline-lg text-2xl mb-3">Leak Detection</h3>
+<p class="text-on-surface-variant mb-6">Ultrasonic and thermal imaging to find invisible moisture before it causes damage.</p>
+<a class="text-accent-blue font-label-sm inline-flex items-center gap-2 group-hover:gap-4 transition-all" href="#">Explore <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<!-- Service 2 -->
+<div class="p-8 border border-outline-variant rounded-2xl hover:border-accent-blue transition-all group reveal-up">
+<div class="w-12 h-12 bg-surface-container mb-6 flex items-center justify-center rounded-xl group-hover:bg-accent-blue/10 transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-accent-blue" data-icon="plumbing">plumbing</span>
+</div>
+<h3 class="font-headline-lg text-2xl mb-3">Pipe Installation</h3>
+<p class="text-on-surface-variant mb-6">Modern architectural plumbing integration with PEX and copper alloy systems.</p>
+<a class="text-accent-blue font-label-sm inline-flex items-center gap-2 group-hover:gap-4 transition-all" href="#">Explore <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<!-- Service 3 -->
+<div class="p-8 border border-outline-variant rounded-2xl hover:border-accent-blue transition-all group reveal-up">
+<div class="w-12 h-12 bg-surface-container mb-6 flex items-center justify-center rounded-xl group-hover:bg-accent-blue/10 transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-accent-blue" data-icon="monitor_heart">monitor_heart</span>
+</div>
+<h3 class="font-headline-lg text-2xl mb-3">Smart Monitoring</h3>
+<p class="text-on-surface-variant mb-6">IoT-enabled flow sensors that alert your mobile device in real-time to anomalies.</p>
+<a class="text-accent-blue font-label-sm inline-flex items-center gap-2 group-hover:gap-4 transition-all" href="#">Explore <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<!-- Service 4 -->
+<div class="p-8 border border-outline-variant rounded-2xl hover:border-accent-blue transition-all group reveal-up">
+<div class="w-12 h-12 bg-surface-container mb-6 flex items-center justify-center rounded-xl group-hover:bg-accent-blue/10 transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-accent-blue" data-icon="emergency_home">emergency_home</span>
+</div>
+<h3 class="font-headline-lg text-2xl mb-3">Emergency Repair</h3>
+<p class="text-on-surface-variant mb-6">Rapid response team for critical system failures, available around the clock.</p>
+<a class="text-accent-blue font-label-sm inline-flex items-center gap-2 group-hover:gap-4 transition-all" href="#">Explore <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<!-- Service 5 -->
+<div class="p-8 border border-outline-variant rounded-2xl hover:border-accent-blue transition-all group reveal-up">
+<div class="w-12 h-12 bg-surface-container mb-6 flex items-center justify-center rounded-xl group-hover:bg-accent-blue/10 transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-accent-blue" data-icon="water_drop">water_drop</span>
+</div>
+<h3 class="font-headline-lg text-2xl mb-3">Water Filtration</h3>
+<p class="text-on-surface-variant mb-6">Multi-stage carbon and UV filtration systems for pure, laboratory-grade water.</p>
+<a class="text-accent-blue font-label-sm inline-flex items-center gap-2 group-hover:gap-4 transition-all" href="#">Explore <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<!-- Service 6 -->
+<div class="p-8 border border-outline-variant rounded-2xl hover:border-accent-blue transition-all group reveal-up">
+<div class="w-12 h-12 bg-surface-container mb-6 flex items-center justify-center rounded-xl group-hover:bg-accent-blue/10 transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-accent-blue" data-icon="settings">settings</span>
+</div>
+<h3 class="font-headline-lg text-2xl mb-3">System Maintenance</h3>
+<p class="text-on-surface-variant mb-6">Preventative scheduling and component optimization to extend system life.</p>
+<a class="text-accent-blue font-label-sm inline-flex items-center gap-2 group-hover:gap-4 transition-all" href="#">Explore <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Choose Us: Bento Grid -->
+<section class="py-stack-xl px-margin-desktop max-w-container-max mx-auto">
+<div class="mb-16 text-center reveal-up">
+<h2 class="font-headline-lg text-headline-lg mb-4">Precision Philosophy</h2>
+<p class="text-on-surface-variant mx-auto max-w-xl">We treat plumbing as a critical infrastructure layer, not just a utility.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6 h-auto md:h-[600px]">
+<div class="md:col-span-2 lg:col-span-3 bg-primary text-on-primary p-10 rounded-2xl flex flex-col justify-end reveal-up">
+<span class="material-symbols-outlined text-5xl mb-6 opacity-30" data-icon="precision_manufacturing">precision_manufacturing</span>
+<h3 class="font-headline-lg text-3xl mb-4">Technical Precision</h3>
+<p class="text-on-primary/70">Every fitting is measured to the millimeter. We use high-grade aerospace materials for residential longevity.</p>
+</div>
+<div class="md:col-span-2 lg:col-span-3 glass-panel p-10 rounded-2xl flex flex-col justify-start reveal-up">
+<h3 class="font-headline-lg text-3xl mb-4 text-accent-blue">Radical Transparency</h3>
+<p class="text-on-surface-variant mb-8">Video documented inspections and real-time cost tracking through our client dashboard.</p>
+<div class="mt-auto h-32 w-full bg-surface-container rounded-xl overflow-hidden relative">
+<div class="absolute inset-0 bg-accent-blue/10 animate-pulse"></div>
+<div class="absolute bottom-4 left-4 right-4 h-1 bg-outline-variant rounded-full">
+<div class="h-full bg-accent-blue w-[75%] rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="md:col-span-2 lg:col-span-2 bg-accent-orange text-white p-10 rounded-2xl reveal-up">
+<h3 class="font-headline-lg text-2xl mb-4">Sustainable Flow</h3>
+<p class="text-white/80">Eco-conscious engineering that reduces water consumption by up to 35% without pressure loss.</p>
+</div>
+<div class="md:col-span-2 lg:col-span-4 bg-surface-container-highest p-10 rounded-2xl reveal-up">
+<div class="flex items-center gap-10 h-full">
+<div class="hidden lg:block w-48 shrink-0">
+<div class="w-full aspect-square border-4 border-accent-blue/20 rounded-full flex items-center justify-center">
+<div class="w-[70%] aspect-square border-4 border-accent-blue/40 rounded-full animate-[spin_10s_linear_infinite]"></div>
+</div>
+</div>
+<div>
+<h3 class="font-headline-lg text-2xl mb-4">IoT Integration</h3>
+<p class="text-on-surface-variant">Seamlessly connect your plumbing to Apple HomeKit, Google Home, or Amazon Alexa for smart leakage prevention.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Process Timeline -->
+<section class="py-stack-xl bg-surface-container-low">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="text-center mb-16 reveal-up">
+<h2 class="font-headline-lg text-headline-lg mb-4">The Protocol</h2>
+</div>
+<div class="relative flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
+<div class="absolute top-1/2 left-0 w-full h-px bg-outline-variant hidden md:block -translate-y-1/2 -z-10"></div>
+<div class="flex-1 flex flex-col items-center text-center reveal-up">
+<div class="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xl mb-4 relative">
+                            1
+                            <div class="absolute -inset-2 rounded-full border border-primary/20 animate-ping"></div>
+</div>
+<h4 class="font-semibold mb-2">Book</h4>
+<p class="text-on-surface-variant text-sm">Schedule via our 24/7 digital portal.</p>
+</div>
+<div class="flex-1 flex flex-col items-center text-center reveal-up">
+<div class="w-14 h-14 rounded-full bg-white border-2 border-primary text-primary flex items-center justify-center font-bold text-xl mb-4">2</div>
+<h4 class="font-semibold mb-2">Inspection</h4>
+<p class="text-on-surface-variant text-sm">Digital diagnostics and scope of work.</p>
+</div>
+<div class="flex-1 flex flex-col items-center text-center reveal-up">
+<div class="w-14 h-14 rounded-full bg-white border-2 border-primary text-primary flex items-center justify-center font-bold text-xl mb-4">3</div>
+<h4 class="font-semibold mb-2">Repair</h4>
+<p class="text-on-surface-variant text-sm">Precision execution by our engineers.</p>
+</div>
+<div class="flex-1 flex flex-col items-center text-center reveal-up">
+<div class="w-14 h-14 rounded-full bg-accent-blue text-white flex items-center justify-center font-bold text-xl mb-4">4</div>
+<h4 class="font-semibold mb-2">Done</h4>
+<p class="text-on-surface-variant text-sm">Final QC and digital sign-off.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-stack-xl px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="p-8 glass-panel rounded-2xl reveal-up">
+<div class="text-accent-orange mb-6 flex">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-lg italic mb-8">"The smart leak monitoring they installed saved my hardwood floors from a catastrophic failure. Absolute professionals."</p>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-accent-blue flex items-center justify-center text-white font-bold">JW</div>
+<div>
+<div class="font-bold text-sm">Julian West</div>
+<div class="text-xs text-on-surface-variant">Residential Client</div>
+</div>
+</div>
+</div>
+<div class="p-8 glass-panel rounded-2xl reveal-up">
+<div class="text-accent-orange mb-6 flex">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-lg italic mb-8">"I've never seen a plumbing company work with such surgical precision. Their reporting is world-class."</p>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-accent-orange flex items-center justify-center text-white font-bold">ML</div>
+<div>
+<div class="font-bold text-sm">Marcus Lin</div>
+<div class="text-xs text-on-surface-variant">Property Developer</div>
+</div>
+</div>
+</div>
+<div class="p-8 glass-panel rounded-2xl reveal-up">
+<div class="text-accent-orange mb-6 flex">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-lg italic mb-8">"Reliable, clean, and technologically advanced. They are the only ones I trust with my smart home integration."</p>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold">SA</div>
+<div>
+<div class="font-bold text-sm">Sarah Adams</div>
+<div class="text-xs text-on-surface-variant">Architect</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-stack-xl px-margin-desktop max-w-container-max mx-auto">
+<div class="bg-primary text-on-primary rounded-[32px] p-12 lg:p-24 overflow-hidden relative">
+<div class="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
+<!-- STITCH_SVG_START:ANIMATION_2 class="w-full h-full" --><div class="w-full h-full" id="animated-svg-ANIMATION_2" style="display:block;"><svg fill="none" height="600" viewbox="0 0 600 600" width="600" xmlns="http://www.w3.org/2000/svg">
+<!-- Abstract Plumbing Illustration -->
+<defs>
+<lineargradient id="pipe_grad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#0F172A"></stop>
+<stop offset="100%" stop-color="#2563EB"></stop>
+</lineargradient>
+<filter height="140%" id="blur_glow" width="140%" x="-20%" y="-20%">
+<fegaussianblur result="blur" stddeviation="15"></fegaussianblur>
+</filter>
+</defs>
+<!-- Background Glow -->
+<circle cx="300" cy="300" fill="#2563EB" fill-opacity="0.05" filter="url(#blur_glow)" r="150"></circle>
+<!-- Abstract Pipe Geometry -->
+<path d="M100 300 H250 V150 H350 V450 H500" stroke="url(#pipe_grad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+<path d="M250 250 H350" stroke="#F97316" stroke-linecap="round" stroke-width="12"></path>
+<!-- Circles/Valves -->
+<circle cx="250" cy="300" fill="#F97316" r="16"></circle>
+<circle cx="350" cy="150" fill="#FAFAFA" r="20" stroke="#0F172A" stroke-width="4"></circle>
+<circle cx="350" cy="450" fill="#2563EB" r="16"></circle>
+<!-- Water Drops / Flow -->
+<circle cx="450" cy="450" fill="#2563EB" opacity="0.6" r="6">
+<animate attributename="opacity" dur="3s" repeatcount="indefinite" values="0.2;0.6;0.2"></animate>
+</circle>
+<circle cx="480" cy="450" fill="#2563EB" opacity="0.4" r="4"></circle>
+<!-- Abstract Accents -->
+<rect fill="#0F172A" height="8" opacity="0.2" rx="4" width="40" x="150" y="280"></rect>
+<rect fill="#2563EB" height="6" opacity="0.2" rx="3" width="30" x="410" y="440"></rect>
+</svg></div><!-- STITCH_SVG_END:ANIMATION_2 -->
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10">
+<div>
+<h2 class="font-display-lg text-4xl lg:text-6xl mb-8 leading-tight">Ready for <br/>Precision Flow?</h2>
+<p class="text-on-primary/60 font-body-lg mb-12 max-w-md">Contact our engineering desk for a consult or emergency support.</p>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-accent-orange">phone_in_talk</span>
+<span class="font-headline-lg text-2xl">1-800-<span class="brand-name">AQUAFLOW</span></span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-accent-blue">mail</span>
+<span class="font-body-lg">hello@<span class="brand-name-lowercase">aquaflow</span>.com</span>
+</div>
+</div>
+</div>
+<div class="bg-white/5 backdrop-blur-md rounded-2xl p-8 lg:p-12 border border-white/10">
+<form class="space-y-8">
+<div class="relative">
+<input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-accent-blue transition-all peer" id="name" placeholder=" " type="text"/>
+<label class="absolute left-0 top-3 text-white/40 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-accent-blue" for="name">Full Name</label>
+</div>
+<div class="relative">
+<input class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-accent-blue transition-all peer" id="email" placeholder=" " type="email"/>
+<label class="absolute left-0 top-3 text-white/40 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-accent-blue" for="email">Email Address</label>
+</div>
+<div class="relative">
+<select class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-3 text-white focus:ring-0 focus:border-accent-blue transition-all" id="service">
+<option class="bg-primary">Select Service</option>
+<option class="bg-primary">Leak Detection</option>
+<option class="bg-primary">Smart Monitoring</option>
+<option class="bg-primary">Installation</option>
+<option class="bg-primary">Emergency</option>
+</select>
+</div>
+<button class="w-full bg-accent-blue text-white py-4 rounded-xl font-bold tracking-widest uppercase hover:bg-accent-blue/90 transition-all" type="submit">Request Engineering Consult</button>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest py-stack-xl border-t border-outline-variant mt-stack-xl">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter mb-12">
+<div>
+<div class="font-headline-lg text-headline-lg text-primary mb-6"><span class="brand-name">AQUAFLOW</span></div>
+<p class="text-on-surface-variant text-sm">Engineering superior flow systems for the modern era.</p>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-bold text-xs uppercase tracking-widest text-primary mb-2">Company</span>
+<a class="text-on-surface-variant hover:text-secondary transition-colors text-label-sm" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors text-label-sm" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors text-label-sm" href="#">Service Status</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-bold text-xs uppercase tracking-widest text-primary mb-2">Resources</span>
+<a class="text-on-surface-variant hover:text-secondary transition-colors text-label-sm" href="#">Documentation</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors text-label-sm" href="#">Contact</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors text-label-sm" href="#">Case Studies</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-bold text-xs uppercase tracking-widest text-primary mb-2">Support</span>
+<a class="text-on-surface-variant hover:text-secondary transition-colors text-label-sm" href="#">Emergency Desk</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors text-label-sm" href="#">Maintenance Portal</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors text-label-sm" href="#">FAQ</a>
+</div>
+</div>
+<div class="pt-8 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-on-surface-variant text-label-sm">© 2026 <span class="brand-name">AquaFlow</span> Engineering. Precision in Motion.</p>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Simple Intersection Observer for reveal animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // UrbanFlow dynamic demo script
+        const params = new URLSearchParams(window.location.search);
+        const bname = params.get('name');
+        const email = params.get('email');
+        if (bname) {
+            document.title = bname + " | Precision Plumbing Engineering";
+            const brandNames = document.querySelectorAll('.brand-name');
+            brandNames.forEach(el => el.textContent = bname);
+            const brandNamesLower = document.querySelectorAll('.brand-name-lowercase');
+            brandNamesLower.forEach(el => el.textContent = bname.toLowerCase().replace(/\s+/g, ''));
+        }
+        
+        const upsell = document.createElement('div');
+        upsell.innerHTML = `
+        <div style="background: #0F172A; color: #fff; padding: 60px 20px; text-align: center; border-top: 1px solid #1e293b; font-family: 'Inter', sans-serif;">
+            <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 16px; letter-spacing: -1px;">Love how your new site looks?</h2>
+            <p style="color: #94a3b8; font-size: 18px; margin-bottom: 24px;">This is just a prototype. Let UrbanFlow Works engineer the real thing.</p>
+            ${email ? `<p style="font-size: 14px; margin-bottom: 24px; color:#cbd5e1;">(We've already sent a copy to <strong style="color:#2563EB;">${email}</strong>)</p>` : ''}
+            <a href="../contact.html" target="_parent" style="display:inline-block; background: #2563EB; color: #fff; padding: 16px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; box-shadow: 0 10px 20px rgba(37,99,235,0.2);">Book Your Build</a>
+        </div>`;
+        document.body.appendChild(upsell);
+    </script>
+</body>
+</html>

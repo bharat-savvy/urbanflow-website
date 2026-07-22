@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoltFix - Premium Electrician</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --el-primary: #3b82f6; /* Blue */
+            --el-accent: #f59e0b; /* Amber */
+            --el-dark: #0f172a;
+            --el-surface: #1e293b;
+            --el-bg: #f8fafc;
+            --el-text: #334155;
+        }
+
+        body { font-family: 'Inter', sans-serif; margin: 0; background: var(--el-bg); color: var(--el-text); padding-top: 40px; overflow-x: hidden; }
+        
+        /* Demo Banner */
+        .demo-banner { position: fixed; top: 0; left: 0; right: 0; background: #000; color: #fff; padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; z-index: 10000; font-size: 14px; font-weight: 600; }
+        .demo-banner a { background: var(--el-primary); color: #fff; text-decoration: none; padding: 4px 12px; border-radius: 4px; }
+
+        /* Navbar */
+        .nav { position: absolute; top: 40px; left: 0; right: 0; z-index: 100; padding: 24px 5%; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 28px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .logo svg { color: var(--el-accent); }
+        .nav-links { display: flex; align-items: center; gap: 32px; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 600; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+        
+        .btn-call { background: var(--el-accent); color: var(--el-dark); padding: 12px 24px; border-radius: 100px; font-weight: 800; text-decoration: none; box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4); transition: all 0.3s; }
+        .btn-call:hover { transform: scale(1.05); }
+
+        /* Hero */
+        .hero { position: relative; min-height: 90vh; display: flex; align-items: center; justify-content: center; background: url('../images/electrician-hero.png') center/cover no-repeat; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.4) 100%); }
+        .hero-content { position: relative; z-index: 10; width: 100%; max-width: 1200px; padding: 0 5%; }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; padding: 56px; max-width: 650px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+        .badge { display: inline-block; padding: 6px 16px; border-radius: 100px; background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; }
+        .glass-panel h1 { font-size: 64px; line-height: 1.1; margin: 0 0 24px 0; font-weight: 900; letter-spacing: -1px; color:#fff;}
+        .glass-panel p { font-size: 20px; color: #cbd5e1; margin-bottom: 40px; line-height: 1.6; }
+        .trust-grid { display: flex; gap: 24px; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; }
+        .trust-item { display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 15px; color: #e2e8f0; }
+        .trust-item svg { color: var(--el-accent); }
+
+        /* Services */
+        .section { padding: 100px 5%; }
+        .section-header { text-align: center; margin-bottom: 64px; }
+        .section-header h2 { font-size: 48px; color: var(--el-dark); margin: 0 0 16px 0; font-weight: 900; letter-spacing: -1px; }
+        .section-header p { font-size: 20px; color: #64748b; max-width: 600px; margin: 0 auto; }
+
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto; }
+        .service-card {
+            background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0; transition: all 0.3s; position: relative; overflow: hidden;
+        }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1); border-color: var(--el-primary); }
+        .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--el-primary); transform: scaleX(0); transform-origin: left; transition: transform 0.3s;}
+        .service-card:hover::before { transform: scaleX(1); }
+        .s-icon { width: 64px; height: 64px; background: #eff6ff; color: var(--el-primary); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+        .service-card h3 { font-size: 24px; color: var(--el-dark); margin: 0 0 16px 0; }
+        .service-card p { color: #64748b; line-height: 1.6; margin: 0; }
+
+        /* Stats/Why Us */
+        .stats { background: var(--el-dark); color: #fff; padding: 80px 5%; }
+        .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+        .stats-text h2 { font-size: 40px; margin: 0 0 24px 0; font-weight: 900; }
+        .stats-text p { font-size: 18px; color: #94a3b8; line-height: 1.6; margin-bottom: 32px; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .stat-box { background: var(--el-surface); padding: 32px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); }
+        .stat-box h4 { font-size: 48px; color: var(--el-accent); margin: 0 0 8px 0; font-weight: 900; }
+        .stat-box p { margin: 0; color: #cbd5e1; font-weight: 600; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;}
+
+        /* Testimonials */
+        .testimonials { background: #fff; }
+        .t-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto; }
+        .t-card { background: var(--el-bg); padding: 40px; border-radius: 16px; }
+        .stars { color: var(--el-accent); margin-bottom: 16px; display: flex; gap: 4px; }
+        .t-card p { font-size: 18px; font-style: italic; color: var(--el-dark); margin-bottom: 24px; line-height: 1.6; }
+        .t-author { font-weight: 800; color: var(--el-primary); }
+
+        /* Footer */
+        .footer { background: var(--el-dark); color: #fff; padding: 80px 5% 40px; border-top: 5px solid var(--el-primary); }
+        .f-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto 60px; }
+        .f-col h4 { font-size: 20px; margin: 0 0 24px 0; color: var(--el-accent); }
+        .f-col p { color: #94a3b8; line-height: 1.6; margin: 0 0 16px 0; }
+        .f-bottom { text-align: center; color: #64748b; font-size: 14px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .glass-panel { padding: 24px; border-radius: 16px; margin-top: 40px; }
+            .glass-panel h1 { font-size: 36px; }
+            .glass-panel p { font-size: 16px; }
+            .trust-grid { flex-direction: column; gap: 12px; }
+            .section { padding: 60px 5%; }
+            .section-header h2 { font-size: 32px; }
+            .stats-inner { grid-template-columns: 1fr; gap: 32px; }
+            .stats-grid { gap: 12px; }
+            .stat-box { padding: 16px; }
+            .stat-box h4 { font-size: 32px; }
+            .stat-box p { font-size: 12px; }
+            .footer { padding-bottom: 100px; } /* Space for mobile CTA */
+            .mobile-cta { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); padding: 16px; z-index: 1000; display: flex; justify-content: center; box-sizing: border-box; }
+            .mobile-cta .btn-call { width: 100%; text-align: center; font-size: 16px; padding: 14px; box-sizing: border-box; white-space: normal; }
+        }
+        @media (min-width: 769px) { .mobile-cta { display: none; } }
+    </style>
+</head>
+<body>
+
+    <div class="demo-banner">
+        <span>UrbanFlow Template: Premium Electrician</span>
+        <a href="../services.html">Hire Us to Build This</a>
+    </div>
+
+    <nav class="nav">
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            VoltFix
+        </div>
+        <div class="nav-links">
+            <a href="#">Services</a>
+            <a href="#">Why Us</a>
+            <a href="#">Reviews</a>
+            <a href="#" class="btn-call">Emergency: (555) 123-4567</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="glass-panel">
+                <span class="badge">Licensed & Insured</span>
+                <h1>Master-Level<br>Electrical Services</h1>
+                <p>Don't risk your home's safety with amateurs. We deliver pristine, code-compliant electrical work in under 60 minutes.</p>
+                <a href="#" class="btn-call" style="display: inline-block; padding: 18px 40px; font-size: 18px;">Request Fast Quote</a>
+                
+                <div class="trust-grid">
+                    <div class="trust-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        5-Star Rated
+                    </div>
+                    <div class="trust-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        24/7 Availability
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="section-header">
+            <h2>Comprehensive Services</h2>
+            <p>From simple repairs to full smart-home integrations, our master electricians handle it all.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="s-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                <h3>Panel Upgrades</h3>
+                <p>Modernize your home's electrical panel to handle today's heavy power demands safely and efficiently.</p>
+            </div>
+            <div class="service-card">
+                <div class="s-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="12"/><line x1="12" y1="12" x2="22" y2="12"/></svg></div>
+                <h3>Custom Lighting</h3>
+                <p>Beautiful indoor and outdoor LED lighting installations that completely transform your living space.</p>
+            </div>
+            <div class="service-card">
+                <div class="s-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg></div>
+                <h3>Smart Home Setup</h3>
+                <p>Integration of smart thermostats, doorbells, security cameras, and automated lighting controls.</p>
+            </div>
+            <div class="service-card">
+                <div class="s-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+                <h3>Surge Protection</h3>
+                <p>Whole-house surge protectors to keep your expensive appliances safe from storms and grid fluctuations.</p>
+            </div>
+            <div class="service-card">
+                <div class="s-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+                <h3>EV Charging Stations</h3>
+                <p>Fast and safe installation of Level 2 electric vehicle chargers in your garage or driveway.</p>
+            </div>
+            <div class="service-card">
+                <div class="s-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.77z"/></svg></div>
+                <h3>Emergency Repairs</h3>
+                <p>24/7 rapid response for sparking outlets, dead circuits, or complete power loss emergencies.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-inner">
+            <div class="stats-text">
+                <h2>Why trust <span class="brand-name">VoltFix</span>?</h2>
+                <p>We don't cut corners. Electrical work requires precision, up-to-date code knowledge, and a commitment to safety. Our master electricians are fully vetted and continuously trained.</p>
+                <a href="#" class="btn-call" style="background:#fff; color:var(--el-dark);">See our certifications</a>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <h4>15+</h4>
+                    <p>Years Experience</p>
+                </div>
+                <div class="stat-box">
+                    <h4>5k+</h4>
+                    <p>Homes Serviced</p>
+                </div>
+                <div class="stat-box">
+                    <h4>100%</h4>
+                    <p>Satisfaction Guarantee</p>
+                </div>
+                <div class="stat-box">
+                    <h4>60m</h4>
+                    <p>Avg Response Time</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section testimonials">
+        <div class="section-header">
+            <h2>What our neighbors say</h2>
+        </div>
+        <div class="t-grid">
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p>"Lost half the power in my house on a Sunday night. <span class="brand-name">VoltFix</span> arrived in 45 minutes, found the burnt out breaker, and had us up and running safely. Incredible service."</p>
+                <div class="t-author">— Sarah Jenkins</div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p>"They completely rewired our 1950s home. The crew was respectful, clean, and passed the city inspection on the very first try. Worth every penny."</p>
+                <div class="t-author">— Mike T.</div>
+            </div>
+            <div class="t-card">
+                <div class="stars">★★★★★</div>
+                <p>"Installed my Tesla charger and outdoor lighting in one afternoon. The cable management is literal perfection. Highly recommend these guys."</p>
+                <div class="t-author">— David Chen</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="f-grid">
+            <div class="f-col">
+                <div class="logo" style="margin-bottom: 24px;">VoltFix</div>
+                <p>Your trusted, local master electricians. Powering the community safely since 2011.</p>
+            </div>
+            <div class="f-col">
+                <h4>Contact Us</h4>
+                <p><strong>Emergency:</strong> (555) 123-4567</p>
+                <p><strong>Office:</strong> (555) 987-6543</p>
+                <p><strong>Email:</strong> help@<span class="brand-name-lowercase">voltfix</span>demo.com</p>
+            </div>
+            <div class="f-col">
+                <h4>Service Areas</h4>
+                <p>Downtown Metro</p>
+                <p>Northside Suburbs</p>
+                <p>West End Valley</p>
+            </div>
+        </div>
+        <div class="f-bottom">
+            <p>Demo Website Template built by UrbanFlow Works. License #EL-9923847.</p>
+        </div>
+    </footer>
+    
+    <div class="mobile-cta">
+        <a href="#" class="btn-call">Call (555) 123-4567</a>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const bname = params.get('name');
+        const email = params.get('email');
+        if (bname) {
+            document.title = bname + " - Premium Electrician";
+            const logos = document.querySelectorAll('.logo');
+            logos.forEach(logo => {
+                if(logo.lastChild) logo.lastChild.textContent = ' ' + bname;
+            });
+            const brandNames = document.querySelectorAll('.brand-name');
+            brandNames.forEach(el => el.textContent = bname);
+            const brandNamesLower = document.querySelectorAll('.brand-name-lowercase');
+            brandNamesLower.forEach(el => el.textContent = bname.toLowerCase().replace(/\s+/g, ''));
+        }
+        
+        const upsell = document.createElement('div');
+        let emailText = '';
+        if (email) {
+            emailText = `<p style="font-size: 14px; margin-bottom: 24px; color:#cbd5e1;">(We've already sent a copy to <strong style="color:#2563EB;">${email}</strong>)</p>`;
+        }
+
+        upsell.innerHTML = `
+        <div style="background: #0F172A; color: #fff; padding: 60px 20px; text-align: center; border-top: 1px solid #1e293b; font-family: 'Inter', sans-serif;">
+            <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 16px; letter-spacing: -1px;">Love how your new site looks?</h2>
+            <p style="color: #94a3b8; font-size: 18px; margin-bottom: 24px;">This is just a prototype. Let UrbanFlow Works engineer the real thing.</p>
+            ${emailText}
+            <a href="../contact.html" target="_parent" style="display:inline-block; background: #2563EB; color: #fff; padding: 16px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; box-shadow: 0 10px 20px rgba(37,99,235,0.2);">Book Your Build</a>
+        </div>`;
+        document.body.appendChild(upsell);
+    </script>
+</body>
+</html>

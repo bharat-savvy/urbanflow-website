@@ -74,10 +74,16 @@
 }
 .navbar.scrolled {
   background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   box-shadow: var(--shadow-navbar);
   padding: var(--sp-3) 0;
+}
+.navbar.scrolled::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: -1;
 }
 .navbar-inner {
   display: flex;
@@ -759,4 +765,75 @@
 .toast.show {
   transform: translateY(0);
   opacity: 1;
+}
+
+/* ── Pricing Card ── */
+.pricing-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--sp-10);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--tr-base);
+}
+.pricing-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--color-primary);
+  transform: translateY(-4px);
+}
+.pricing-card--popular {
+  border-color: var(--color-teal);
+  box-shadow: var(--shadow-md);
+  padding-top: var(--sp-12);
+}
+.pricing-card--popular::before {
+  content: 'Most Popular';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  background: var(--color-teal);
+  color: #fff;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  text-align: center;
+  padding: var(--sp-2) 0;
+  letter-spacing: var(--ls-wide);
+}
+.pricing-header {
+  margin-bottom: var(--sp-6);
+  text-align: center;
+}
+.pricing-title {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  margin-bottom: var(--sp-2);
+}
+.pricing-price {
+  font-size: var(--fs-4xl);
+  font-weight: var(--fw-extrabold);
+  color: var(--color-primary);
+  margin-bottom: var(--sp-2);
+}
+.pricing-desc {
+  font-size: var(--fs-sm);
+  color: var(--color-text-secondary);
+}
+.pricing-features {
+  flex-grow: 1;
+  margin-bottom: var(--sp-8);
+}
+.pricing-feature {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-3);
+  font-size: var(--fs-sm);
+}
+.pricing-feature svg {
+  width: 18px; height: 18px;
+  color: var(--color-teal);
+  flex-shrink: 0;
 }

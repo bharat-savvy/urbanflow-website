@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Masterclass — UrbanFlow Works</title>
+    <meta name="description" content="Learn how to create a complete app and website in just 3 days using the power of AI. Taught by the experts at UrbanFlow Works.">
+    
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        /* Course Specific Styles */
+        .navbar { background: rgba(255, 255, 255, 0.95) !important; box-shadow: var(--shadow-sm); }
+        .navbar::before { content: ""; position: absolute; inset: 0; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: -1; }
+        .course-hero h1, .course-hero h2, .course-hero h3 { color: #fff !important; }
+
+        .course-hero {
+            background: #0f172a;
+            color: #fff;
+            padding: calc(var(--sp-24) + 60px) 0 var(--sp-20);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        .course-hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 100%, rgba(20, 184, 166, 0.15) 0%, transparent 60%);
+            z-index: 0;
+        }
+        .course-hero .container { position: relative; z-index: 1; }
+        
+        .vid-placeholder {
+            width: 100%; max-width: 800px; aspect-ratio: 16/9; background: #1e293b;
+            margin: var(--sp-10) auto 0; border-radius: var(--radius-2xl); border: 2px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4); cursor: pointer; transition: all 0.3s;
+        }
+        .vid-placeholder:hover { border-color: var(--color-teal); transform: translateY(-5px); }
+        .vid-placeholder svg { width: 80px; height: 80px; color: #fff; opacity: 0.8; transition: transform 0.3s;}
+        .vid-placeholder:hover svg { transform: scale(1.1); color: var(--color-teal); opacity: 1; }
+        
+        .pulse-btn {
+            background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-light) 100%);
+            color: #fff; font-size: var(--fs-xl); padding: 18px 48px; border-radius: var(--radius-full);
+            font-weight: var(--fw-black); border: none; cursor: pointer;
+            box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.7); animation: pulse-teal 2s infinite; display: inline-block;
+            text-decoration: none; margin-top: var(--sp-8);
+        }
+        @keyframes pulse-teal {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(20, 184, 166, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(20, 184, 166, 0); }
+        }
+
+        /* Audience */
+        .audience { padding: var(--sp-20) 0; background: var(--color-bg); }
+        .aud-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-8); margin-top: var(--sp-12); }
+        .aud-card { background: #fff; padding: var(--sp-8); border-radius: var(--radius-xl); border: 1px solid var(--color-border); box-shadow: var(--shadow-sm); transition: transform 0.3s; text-align: left;}
+        .aud-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--color-teal);}
+        .aud-card svg { width: 40px; height: 40px; color: var(--color-teal); margin-bottom: var(--sp-4); }
+
+        /* Timeline */
+        .timeline { padding: var(--sp-20) 0; background: #f8fafc; }
+        .time-node { background: #fff; border-radius: var(--radius-2xl); padding: var(--sp-12); margin-bottom: var(--sp-12); box-shadow: var(--shadow-lg); border: 1px solid var(--color-border); display: grid; grid-template-columns: 1fr 2fr; gap: var(--sp-12); align-items: center;}
+        .time-node.flip { grid-template-columns: 2fr 1fr; }
+        .time-day { font-size: 80px; font-weight: 900; color: rgba(20, 184, 166, 0.1); line-height: 1; margin-bottom: var(--sp-2); }
+        .time-list li { margin-bottom: var(--sp-3); padding-left: 28px; position: relative; font-size: var(--fs-lg); color: var(--color-text-secondary); }
+        .time-list li::before { content: '✓'; position: absolute; left: 0; color: var(--color-teal); font-weight: bold; }
+
+        /* Instructor */
+        .instructor { padding: var(--sp-20) 0; background: #0f172a; color: #fff; }
+        .inst-box { display: grid; grid-template-columns: 1fr 2fr; gap: var(--sp-12); align-items: center; background: #1e293b; padding: var(--sp-12); border-radius: var(--radius-2xl); border: 1px solid rgba(255,255,255,0.1); }
+        .inst-img { width: 100%; aspect-ratio: 1; border-radius: var(--radius-full); background: linear-gradient(135deg, var(--color-teal) 0%, #0f172a 100%); display: flex; align-items: center; justify-content: center; font-size: 64px; font-weight: 900;}
+
+        /* FAQ */
+        .faq { padding: var(--sp-20) 0; }
+        .faq-item { border-bottom: 1px solid var(--color-border); padding: var(--sp-6) 0; cursor: pointer; }
+        .faq-q { font-size: var(--fs-lg); font-weight: var(--fw-bold); display: flex; justify-content: space-between; align-items: center; color: var(--color-text);}
+        .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; color: var(--color-text-secondary); margin-top: 0; }
+        .faq-item.active .faq-a { max-height: 200px; margin-top: var(--sp-4); }
+        .faq-item.active .faq-q { color: var(--color-teal); }
+        
+        @media (max-width: 900px) {
+            .aud-grid { grid-template-columns: 1fr; }
+            .time-node, .time-node.flip { grid-template-columns: 1fr; gap: var(--sp-6); text-align: center; }
+            .time-list li { text-align: left; }
+            .inst-box { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    
+        <!-- ============ NAVBAR ============ -->
+<a href="#main-content" class="visually-hidden">Skip to main content</a>
+<header class="navbar" id="navbar">
+    <div class="container navbar-inner">
+        <a href="index.html" class="navbar-logo" aria-label="UrbanFlow Works — Home">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect width="32" height="32" rx="8" fill="var(--color-primary)" />
+                <path d="M9 17c0 3.31 2.69 6 6 6h1c3.31 0 6-2.69 6-6v-3" stroke="var(--color-teal-light)" stroke-width="2.2" stroke-linecap="round" />
+                <path d="M23 15c0-3.31-2.69-6-6-6h-1c-3.31 0-6 2.69-6 6v3" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" />
+            </svg>
+            <span>UrbanFlow Works</span>
+        </a>
+
+        <nav id="navbar-links" class="navbar-links" aria-label="Primary navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="apps.html" class="nav-link">Apps</a>
+            <a href="course.html" class="nav-link">Course</a>
+            <a href="generator.html" class="nav-link" style="color: var(--color-primary); font-weight: 700;">Demo Generator</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="services.html#pricing" class="btn btn-primary btn-sm navbar-cta">Start Building</a>
+        </nav>
+
+        <button id="navbar-toggle" class="navbar-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navbar-links">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+    <main id="main-content">
+<!-- ============ HERO ============ -->
+    <section class="course-hero">
+        <div class="container">
+            <span style="background: rgba(20, 184, 166, 0.2); color: var(--color-teal-light); padding: 8px 16px; border-radius: 100px; font-weight: 700; font-size: 14px; letter-spacing: 1px; text-transform: uppercase;">The 72-Hour Accelerator</span>
+            <h1 style="font-size: clamp(40px, 6vw, 72px); line-height: 1.1; margin: var(--sp-6) 0; letter-spacing: -2px;">Skip the coding.<br>Launch your empire.</h1>
+            <p style="font-size: var(--fs-xl); color: #94a3b8; max-width: 700px; margin: 0 auto;">Learn how to leverage AI to build production-ready mobile apps and websites in just 3 days. No technical background required.</p>
+            
+            <div class="vid-placeholder reveal--scale">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                <div style="position: absolute; bottom: 20px; left: 20px; font-weight: 600; color: #fff; background: rgba(0,0,0,0.5); padding: 4px 12px; border-radius: 4px;">Watch the Trailer (2:14)</div>
+            </div>
+
+            <a href="#enroll" class="pulse-btn">Join the Masterclass</a>
+            <p style="margin-top: 16px; color: #64748b; font-size: 14px;">Over 500+ founders already enrolled.</p>
+        </div>
+    </section>
+
+    <!-- ============ AUDIENCE ============ -->
+    <section class="audience">
+        <div class="container" style="text-align: center;">
+            <h2 style="font-size: var(--fs-4xl); margin-bottom: var(--sp-4);">Who is this for?</h2>
+            <p style="font-size: var(--fs-lg); color: var(--color-text-secondary); max-width: 600px; margin: 0 auto;">If you have a business idea but lack a tech team, this is your unfair advantage.</p>
+            
+            <div class="aud-grid reveal">
+                <div class="aud-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 22h20L12 2z"/></svg>
+                    <h3 style="font-size: var(--fs-xl); margin-bottom: var(--sp-2);">Non-Technical Founders</h3>
+                    <p style="color: var(--color-text-secondary); line-height: 1.6;">Stop paying agencies $10,000 to build your MVP. Learn to prompt an AI to build exactly what you envision.</p>
+                </div>
+                <div class="aud-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                    <h3 style="font-size: var(--fs-xl); margin-bottom: var(--sp-2);">Freelancers & Agencies</h3>
+                    <p style="color: var(--color-text-secondary); line-height: 1.6;">10x your output. Deliver complex websites and mobile apps to your clients in days instead of months.</p>
+                </div>
+                <div class="aud-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    <h3 style="font-size: var(--fs-xl); margin-bottom: var(--sp-2);">Action Takers</h3>
+                    <p style="color: var(--color-text-secondary); line-height: 1.6;">For those who are tired of "learning" and just want to deploy real software that makes money.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ TIMELINE ============ -->
+    <section class="timeline">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">The Curriculum</span>
+                <h2 class="section-title">The 3-Day Blueprint</h2>
+            </div>
+
+            <!-- Day 1 -->
+            <div class="time-node reveal--left">
+                <div>
+                    <div class="time-day">01</div>
+                    <h3 style="font-size: var(--fs-3xl); margin-bottom: var(--sp-4);">AI Foundations & Design</h3>
+                    <p style="color: var(--color-text-secondary); font-size: var(--fs-lg); line-height: 1.6;">We start by setting up your AI toolchain. You'll learn how to write precise prompts that turn vague ideas into high-fidelity UI designs instantly.</p>
+                </div>
+                <div>
+                    <ul class="time-list">
+                        <li>Mastering Claude 3.5 & GPT-4 for code generation.</li>
+                        <li>Setting up a frictionless local development environment.</li>
+                        <li>Generating pixel-perfect HTML/CSS structures.</li>
+                        <li>The psychology of high-converting landing pages.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Day 2 -->
+            <div class="time-node flip reveal--right">
+                <div>
+                    <ul class="time-list">
+                        <li>Intro to Flutter & Dart logic for AI.</li>
+                        <li>Building cross-platform components (iOS & Android).</li>
+                        <li>Wiring up state management the easy way.</li>
+                        <li>Debugging errors using AI vision.</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="time-day">02</div>
+                    <h3 style="font-size: var(--fs-3xl); margin-bottom: var(--sp-4);">Building The Logic</h3>
+                    <p style="color: var(--color-text-secondary); font-size: var(--fs-lg); line-height: 1.6;">Day 2 is where the magic happens. We'll use AI to write complex application logic, focusing on Flutter to build for both Web and Mobile simultaneously.</p>
+                </div>
+            </div>
+
+            <!-- Day 3 -->
+            <div class="time-node reveal--left">
+                <div>
+                    <div class="time-day">03</div>
+                    <h3 style="font-size: var(--fs-3xl); margin-bottom: var(--sp-4);">Database & Deployment</h3>
+                    <p style="color: var(--color-text-secondary); font-size: var(--fs-lg); line-height: 1.6;">A beautiful app is useless if it's not live. We will connect a backend and push your creation to the App Stores and Web.</p>
+                </div>
+                <div>
+                    <ul class="time-list">
+                        <li>Setting up Firebase/Supabase databases with AI.</li>
+                        <li>Adding User Authentication (Login/Signup).</li>
+                        <li>Deploying to Cloudflare Pages for free web hosting.</li>
+                        <li>Publishing protocols for the App Store & Google Play.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============ INSTRUCTOR ============ -->
+    <section class="instructor">
+        <div class="container reveal--scale">
+            <div class="inst-box">
+                <div class="inst-img">N</div>
+                <div>
+                    <span style="color: var(--color-teal); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Meet Your Instructor</span>
+                    <h2 style="font-size: var(--fs-4xl); margin: var(--sp-2) 0 var(--sp-6);">Niyaz</h2>
+                    <p style="font-size: var(--fs-lg); line-height: 1.8; color: #94a3b8; margin-bottom: var(--sp-6);">
+                        I'm the founder of UrbanFlow Works. Over the last few years, I've built and deployed countless production-level applications. When AI hit the scene, I completely overhauled my workflow. Now, I build apps 10x faster. 
+                        <br><br>
+                        I created this course because I was tired of seeing founders pay massive agency fees for MVP apps. I'm going to hand you my exact AI workflow so you can build it yourself.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="faq">
+        <div class="container" style="max-width: 800px;">
+            <div class="section-header text-center reveal">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-accordion reveal">
+                <div class="faq-item active" onclick="this.classList.toggle('active')">
+                    <div class="faq-q">Do I need to know how to code? <span>+</span></div>
+                    <div class="faq-a">Absolutely not. This course is designed to teach you how to use AI as your lead developer. If you can type English instructions into a chat box, you can build an app.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <div class="faq-q">What tools will we be using? <span>+</span></div>
+                    <div class="faq-a">We rely heavily on Claude 3.5 Sonnet and GPT-4 for code generation. For the tech stack, we use Flutter (for mobile/web), Firebase/Supabase (for database), and Cloudflare (for hosting). Everything we use has massive free tiers.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <div class="faq-q">How long do I have access to the materials? <span>+</span></div>
+                    <div class="faq-a">You get lifetime access. This includes all video modules, our private prompt library, and all source code templates. You will also receive future updates for free.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <div class="faq-q">Is there a refund policy? <span>+</span></div>
+                    <div class="faq-a">Yes! We offer a 14-day no-questions-asked money-back guarantee. If you don't feel like you've learned how to build an app, just email us.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PRICING / ENROLL ============ -->
+    <section id="enroll" style="padding: var(--sp-20) 0; background: var(--color-bg); text-align: center; border-top: 1px solid var(--color-border);">
+        <div class="container reveal--scale">
+            <h2 style="font-size: var(--fs-4xl); margin-bottom: var(--sp-4);">Ready to build?</h2>
+            <p style="font-size: var(--fs-xl); color: var(--color-text-secondary); margin-bottom: var(--sp-12);">Agencies charge $5,000+ for this. Learn to do it yourself.</p>
+            
+            <div style="background: #fff; max-width: 500px; margin: 0 auto; padding: var(--sp-12); border-radius: var(--radius-2xl); border: 2px solid var(--color-teal); box-shadow: 0 30px 60px rgba(20, 184, 166, 0.15);">
+                <h3 style="font-size: var(--fs-2xl); margin-bottom: var(--sp-2);">The 3-Day Masterclass</h3>
+                <div style="font-size: 64px; font-weight: 900; color: var(--color-text); margin-bottom: var(--sp-6);"><span>$</span>149</div>
+                
+                <ul style="text-align: left; margin-bottom: var(--sp-8); line-height: 2;">
+                    <li>✅ Full 3-Day Video Curriculum</li>
+                    <li>✅ The Master Prompt Library</li>
+                    <li>✅ UI/UX Design Templates</li>
+                    <li>✅ Private Discord Community</li>
+                    <li>✅ Lifetime Access</li>
+                </ul>
+                <button class="pulse-btn" style="width: 100%; margin: 0;" onclick="alert('Checkout integration coming soon!')">Enroll Now</button>
+            </div>
+        </div>
+    </section>
+
+    </main>
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="navbar-logo">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                        <rect width="32" height="32" rx="8" fill="var(--color-teal)" />
+                        <path d="M9 17c0 3.31 2.69 6 6 6h1c3.31 0 6-2.69 6-6v-3" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" />
+                        <path d="M23 15c0-3.31-2.69-6-6-6h-1c-3.31 0-6 2.69-6 6v3" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round" />
+                    </svg>
+                    <span>UrbanFlow Works</span>
+                </a>
+                <p>Simple, scalable and reliable software — built with intent, not shortcuts.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <div class="footer-links">
+                    <a href="about.html">About</a>
+                    <a href="services.html">Services</a>
+                    <a href="apps.html">Apps</a>
+                    <a href="course.html">Course</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms &amp; Conditions</a>
+                    <a href="account-deletion.html">Account Deletion</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Products</h4>
+                <div class="footer-links">
+                    <a href="apps.html">Niyaz Mocks</a>
+                    <a href="apps.html">More Coming Soon</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 UrbanFlow Works. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="#" aria-label="UrbanFlow Works on GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.48v-1.87c-2.78.62-3.37-1.37-3.37-1.37-.46-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.36 1.11 2.93.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.9-1.3 2.75-1.03 2.75-1.03.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.81-4.58 5.06.36.32.68.94.68 1.9v2.82c0 .26.18.58.69.48A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z" />
+                    </svg>
+                </a>
+                <a href="#" aria-label="UrbanFlow Works on LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2 3.77-2 4.03 0 4.78 2.6 4.78 6v6.3H18v-5.6c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.97V21H10V9z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="js/navbar.js" defer></script>
+    <script src="js/animations.js" defer></script>
+</body>
+</html>

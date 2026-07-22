@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Store Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ecom-primary: #000;
+            --ecom-bg: #fff;
+            --ecom-gray: #f5f5f5;
+        }
+
+        body { font-family: 'Outfit', sans-serif; margin: 0; background: var(--ecom-bg); color: var(--ecom-primary); overflow-x: hidden; }
+        
+        .promo-bar { background: var(--ecom-primary); color: #fff; text-align: center; padding: 10px; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500;}
+
+        /* Navbar */
+        .nav { padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eaeaea; position: sticky; top: 0; background: #fff; z-index: 100;}
+        .logo { font-size: 28px; font-weight: 900; color: var(--ecom-primary); text-decoration: none; letter-spacing: -1px; text-transform: uppercase;}
+        
+        .nav-links { display: flex; gap: 40px; font-weight: 500;}
+        .nav-links a { color: var(--ecom-primary); text-decoration: none; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; transition: opacity 0.2s;}
+        .nav-links a:hover { opacity: 0.6; }
+        
+        .nav-icons { display: flex; gap: 20px; }
+        .icon { width: 24px; height: 24px; cursor: pointer; }
+
+        /* Hero */
+        .hero { display: flex; height: 80vh; min-height: 600px; background: var(--ecom-gray); }
+        .hero-content { flex: 1; padding: 10% 8%; display: flex; flex-direction: column; justify-content: center; }
+        .hero h1 { font-size: clamp(56px, 6vw, 80px); line-height: 1; margin: 0 0 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -2px;}
+        .hero p { font-size: 20px; color: #555; margin: 0 0 40px; font-weight: 300; max-width: 400px; line-height: 1.5;}
+        
+        .btn-shop { display: inline-block; background: var(--ecom-primary); color: #fff; padding: 18px 40px; font-weight: 700; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; align-self: flex-start; transition: background 0.2s;}
+        .btn-shop:hover { background: #333; }
+        
+        .hero-image { flex: 1; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><rect width="100%" height="100%" fill="%23e0e0e0"/><circle cx="50%" cy="50%" r="20%" fill="%23ccc"/></svg>') center/cover; position: relative; }
+
+        /* Value Props */
+        .values { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid #eaeaea; }
+        .value-item { padding: 40px 20px; text-align: center; border-right: 1px solid #eaeaea; }
+        .value-item:last-child { border-right: none; }
+        .value-icon { margin-bottom: 16px; }
+        .value-item h4 { font-size: 16px; text-transform: uppercase; margin: 0 0 8px; font-weight: 700;}
+        .value-item p { color: #666; font-size: 14px; margin: 0; }
+
+        /* Categories */
+        .categories { padding: 80px 5%; }
+        .cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 500px; }
+        .cat-card { position: relative; background: var(--ecom-gray); display: flex; align-items: center; justify-content: center; overflow: hidden; transition: transform 0.3s;}
+        .cat-card:hover { transform: scale(0.98); }
+        .cat-card::before { content:''; position:absolute; top:0;left:0;width:100%;height:100%; background:rgba(0,0,0,0.1); }
+        .cat-card h3 { position: relative; z-index: 10; font-size: 32px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 1px;}
+        
+        /* Products */
+        .products-section { padding: 80px 5%; background: #fff;}
+        .products-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+        .products-header h2 { font-size: 40px; font-weight: 900; text-transform: uppercase; margin: 0; line-height: 1;}
+        .products-header a { color: var(--ecom-primary); font-weight: 700; text-transform: uppercase; text-decoration: none; border-bottom: 2px solid var(--ecom-primary); padding-bottom: 4px;}
+        
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; }
+        .product-card { text-align: left; cursor: pointer;}
+        .product-card:hover .product-img { opacity: 0.9; }
+        .product-img { height: 380px; background: var(--ecom-gray); margin-bottom: 20px; position: relative; transition: opacity 0.3s;}
+        .badge { position: absolute; top: 16px; left: 16px; background: #fff; padding: 4px 12px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+        .product-title { font-weight: 700; font-size: 16px; margin: 0 0 8px; text-transform: uppercase;}
+        .product-price { color: #666; font-size: 15px;}
+
+        /* Newsletter */
+        .newsletter { background: var(--ecom-primary); color: #fff; padding: 100px 5%; text-align: center; }
+        .newsletter h2 { font-size: 48px; font-weight: 900; text-transform: uppercase; margin: 0 0 16px; }
+        .newsletter p { color: #aaa; margin: 0 0 40px; font-size: 18px; }
+        .nl-form { display: flex; max-width: 500px; margin: 0 auto; border-bottom: 2px solid #fff; padding-bottom: 8px;}
+        .nl-form input { flex: 1; background: transparent; border: none; color: #fff; font-size: 16px; outline: none; font-family: 'Outfit', sans-serif;}
+        .nl-form input::placeholder { color: #888; }
+        .nl-form button { background: transparent; border: none; color: #fff; font-weight: 700; text-transform: uppercase; cursor: pointer; letter-spacing: 1px;}
+
+        /* Footer */
+        .footer { padding: 80px 5% 40px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; border-top: 1px solid #eaeaea; }
+        .footer-brand h2 { font-size: 24px; font-weight: 900; margin: 0 0 16px; text-transform: uppercase;}
+        .footer-brand p { color: #666; line-height: 1.6; max-width: 300px; margin: 0;}
+        .footer h4 { font-size: 14px; font-weight: 700; text-transform: uppercase; margin: 0 0 24px; }
+        .footer a { display: block; color: #666; text-decoration: none; margin-bottom: 12px; font-size: 15px;}
+        .footer a:hover { color: #000; }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav { padding: 16px 5%; }
+            .nav-links { display: none; }
+            .hero { flex-direction: column; height: auto; min-height: 0;}
+            .hero-content { padding: 60px 5%; align-items: center; text-align: center;}
+            .hero h1 { font-size: 40px; }
+            .hero-image { height: 300px; flex: none; width: 100%;}
+            .values { grid-template-columns: 1fr; }
+            .value-item { border-right: none; border-bottom: 1px solid #eaeaea; }
+            .cat-grid { grid-template-columns: 1fr; height: auto; }
+            .cat-card { height: 250px; }
+            .products-header { flex-direction: column; align-items: center; gap: 16px;}
+            .nl-form { flex-direction: column; gap: 16px; border: none; }
+            .nl-form input { border-bottom: 2px solid #fff; padding-bottom: 12px; text-align: center;}
+            .nl-form button { background: #fff; color: #000; padding: 16px; border-radius: 8px;}
+            .footer { grid-template-columns: 1fr; gap: 32px; text-align: center;}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="promo-bar">Free shipping on all orders over $100</div>
+
+    <nav class="nav">
+        <a href="#" class="logo" id="brand-name">Acme Shop</a>
+        <div class="nav-links">
+            <a href="#">New Arrivals</a>
+            <a href="#">Men</a>
+            <a href="#">Women</a>
+            <a href="#">Accessories</a>
+        </div>
+        <div class="nav-icons">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>The New<br>Standard.</h1>
+            <p id="hero-subtitle">Elevate your style with the latest premium collection from Acme Shop.</p>
+            <a href="#" class="btn-shop">Shop Collection</a>
+        </div>
+        <div class="hero-image"></div>
+    </header>
+
+    <div class="values">
+        <div class="value-item">
+            <div class="value-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></div>
+            <h4>Free Shipping</h4>
+            <p>On all orders over $100</p>
+        </div>
+        <div class="value-item">
+            <div class="value-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg></div>
+            <h4>Free Returns</h4>
+            <p>30-day money-back guarantee</p>
+        </div>
+        <div class="value-item">
+            <div class="value-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+            <h4>Secure Checkout</h4>
+            <p>100% protected payments</p>
+        </div>
+    </div>
+
+    <section class="categories">
+        <div class="cat-grid">
+            <div class="cat-card" style="background: #e5e5e5;">
+                <h3>Shop Men</h3>
+            </div>
+            <div class="cat-card" style="background: #d4d4d4;">
+                <h3>Shop Women</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <div class="products-header">
+            <h2>Trending Now</h2>
+            <a href="#">View All</a>
+        </div>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img"><div class="badge">New</div></div>
+                <h3 class="product-title">Essential Heavyweight Tee</h3>
+                <div class="product-price">$35.00</div>
+            </div>
+            <div class="product-card">
+                <div class="product-img"></div>
+                <h3 class="product-title">Everyday Pullover Hoodie</h3>
+                <div class="product-price">$75.00</div>
+            </div>
+            <div class="product-card">
+                <div class="product-img"></div>
+                <h3 class="product-title">Classic Nylon Cap</h3>
+                <div class="product-price">$28.00</div>
+            </div>
+            <div class="product-card">
+                <div class="product-img"><div class="badge">Sale</div></div>
+                <h3 class="product-title">Utility Field Jacket</h3>
+                <div class="product-price">$120.00 <span style="text-decoration:line-through; color:#aaa; font-size:13px; margin-left:8px;">$160.00</span></div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="newsletter">
+        <h2>Join the Club</h2>
+        <p>Subscribe for exclusive drops, early access to sales, and 10% off your first order.</p>
+        <div class="nl-form">
+            <input type="email" placeholder="Enter your email address">
+            <button>Subscribe</button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-brand">
+            <h2 id="footer-brand-name">Acme Shop</h2>
+            <p>Curated essentials for the modern lifestyle. Quality without compromise.</p>
+        </div>
+        <div>
+            <h4>Shop</h4>
+            <a href="#">New Arrivals</a>
+            <a href="#">Men's Clothing</a>
+            <a href="#">Women's Clothing</a>
+            <a href="#">Accessories</a>
+        </div>
+        <div>
+            <h4>Help</h4>
+            <a href="#">Customer Service</a>
+            <a href="#">Track Order</a>
+            <a href="#">Returns & Exchanges</a>
+            <a href="#">Shipping Info</a>
+        </div>
+        <div>
+            <h4>Legal</h4>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+        </div>
+    </footer>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const bname = params.get('name');
+    const email = params.get('email');
+    if (bname) {
+        document.title = bname + " - Store";
+        document.getElementById('brand-name').textContent = bname;
+        document.getElementById('footer-brand-name').textContent = bname;
+        document.getElementById('hero-subtitle').textContent = "Elevate your style with the latest premium collection from " + bname + ".";
+    }
+    
+    const upsell = document.createElement('div');
+    upsell.innerHTML = `
+    <div style="background: #000; color: #fff; padding: 60px 20px; text-align: center; border-top: 1px solid #333; font-family: 'Outfit', sans-serif;">
+        <h2 style="font-size: 32px; font-weight: 900; margin-bottom: 16px; text-transform: uppercase;">Love how your store looks?</h2>
+        <p style="color: #aaa; font-size: 18px; margin-bottom: 24px; font-weight: 300;">This is just a prototype. Let UrbanFlow Works engineer the real thing.</p>
+        ${email ? `<p style="font-size: 14px; margin-bottom: 24px; color:#888;">(We've already sent a copy to <strong style="color:#fff;">${email}</strong>)</p>` : ''}
+        <a href="../contact.html" target="_parent" style="display:inline-block; background: #fff; color: #000; padding: 16px 40px; font-weight: 700; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: transform 0.2s;">Book Your Build</a>
+    </div>`;
+    document.body.appendChild(upsell);
+</script>
+</body>
+</html>

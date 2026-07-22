@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services — UrbanFlow Works</title>
+    <meta name="description"
+        content="Professional software development services. One-time fee, zero monthly payments. We build websites and apps for E-commerce, Restaurants, Plumbers, and more.">
+    <link rel="canonical" href="https://urbanflow.work/services.html">
+
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        /* Chat Widget */
+        .chat-fab {
+            position: fixed; bottom: 24px; right: 24px; width: 60px; height: 60px;
+            background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-light) 100%);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: #fff; cursor: pointer; box-shadow: 0 10px 30px rgba(20, 184, 166, 0.4);
+            z-index: 10000; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .chat-fab:hover { transform: scale(1.1); }
+        .chat-badge {
+            position: absolute; top: 0; right: 0; width: 20px; height: 20px; background: #ef4444;
+            color: #fff; font-size: 12px; font-weight: bold; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; border: 2px solid #fff;
+            animation: bounce-subtle 2s infinite;
+        }
+        @keyframes bounce-subtle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+        
+        .chat-window {
+            position: fixed; bottom: 100px; right: 24px; width: 360px; background: #fff;
+            border-radius: var(--radius-2xl); box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            border: 1px solid var(--color-border); z-index: 10000;
+            opacity: 0; pointer-events: none; transform: translateY(20px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: bottom right; overflow: hidden;
+        }
+        .chat-window.open { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
+        
+        .chat-header {
+            background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-primary-dark) 100%);
+            padding: var(--sp-6); color: #fff; display: flex; justify-content: space-between; align-items: center;
+        }
+        .chat-header h4 { font-size: var(--fs-lg); margin: 0; display: flex; align-items: center; gap: 8px;}
+        .chat-header h4::before { content: ''; width: 10px; height: 10px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981; }
+        .chat-close { background: none; border: none; color: #94a3b8; cursor: pointer; transition: color 0.2s;}
+        .chat-close:hover { color: #fff; }
+        
+        .chat-body { padding: var(--sp-6); max-height: 400px; overflow-y: auto; background: var(--color-surface); }
+        .chat-msg { background: #fff; border: 1px solid var(--color-border); padding: var(--sp-4); border-radius: var(--radius-xl); border-bottom-left-radius: 4px; font-size: 14px; line-height: 1.5; color: var(--color-text); margin-bottom: var(--sp-4); box-shadow: 0 2px 10px rgba(0,0,0,0.02);}
+        
+        .chat-form { display: flex; flex-direction: column; gap: var(--sp-3); }
+        .chat-input, .chat-textarea {
+            width: 100%; border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+            padding: 12px; font-family: inherit; font-size: 14px; outline: none; transition: border-color 0.2s;
+        }
+        .chat-input:focus, .chat-textarea:focus { border-color: var(--color-teal); }
+        .chat-textarea { resize: none; height: 80px; }
+        .chat-btn { background: var(--color-teal); color: #fff; border: none; border-radius: var(--radius-lg); padding: 12px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+        .chat-btn:hover { background: var(--color-teal-light); }
+        .chat-btn.sent { background: #10b981; pointer-events: none; }
+
+        @media (max-width: 600px) {
+            .chat-window { bottom: 0; right: 0; width: 100%; border-radius: 0; height: 100vh; display: flex; flex-direction: column;}
+            .chat-body { flex: 1; max-height: none; }
+            .chat-fab { display: none; }
+        }
+
+        /* Custom styles for dopamine-releasing sections */
+        .highlight-text {
+            background: linear-gradient(135deg, var(--color-teal-light) 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: var(--fw-extrabold);
+        }
+        
+        .badge-pulse {
+            display: inline-block;
+            padding: var(--sp-2) var(--sp-4);
+            border-radius: var(--radius-full);
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-bold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--sp-6);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--sp-4);
+            margin-top: var(--sp-8);
+        }
+
+        .category-pill {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            padding: var(--sp-4);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            font-weight: var(--fw-semibold);
+            color: var(--color-text);
+            transition: all var(--tr-base);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--sp-2);
+        }
+
+        .category-pill:hover {
+            border-color: var(--color-teal);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            color: var(--color-teal);
+        }
+
+        .category-pill svg {
+            width: 28px;
+            height: 28px;
+            color: var(--color-teal);
+        }
+
+        .bonus-box {
+            background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-primary-dark) 100%);
+            border-radius: var(--radius-2xl);
+            padding: var(--sp-12);
+            color: #fff;
+            text-align: center;
+            margin-top: var(--sp-16);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bonus-box::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(20,184,166,0.1) 0%, transparent 60%);
+            z-index: 1;
+        }
+
+        .bonus-box-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .bonus-box h3 {
+            font-size: var(--fs-3xl);
+            margin-bottom: var(--sp-4);
+            color: #fff;
+        }
+
+        /* Currency Switcher Styles */
+        .currency-switcher {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: var(--sp-8);
+            font-weight: var(--fw-bold);
+            font-size: var(--fs-lg);
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--color-border);
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        input:checked + .slider {
+            background-color: var(--color-teal);
+        }
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+        .curr-label {
+            transition: color var(--tr-fast);
+        }
+        .curr-active {
+            color: var(--color-teal);
+        }
+        .curr-inactive {
+            color: var(--color-text-muted);
+        }
+
+        .demo-chip {
+            background: var(--color-surface-alt);
+            border: 1px solid var(--color-border);
+            padding: 6px 12px;
+            border-radius: var(--radius-full);
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-semibold);
+            color: var(--color-text);
+            text-decoration: none;
+            transition: all var(--tr-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .demo-chip:hover {
+            background: rgba(20, 184, 166, 0.1);
+            border-color: var(--color-teal);
+            color: var(--color-teal);
+            transform: translateY(-2px);
+        }
+
+        /* Cost Calculator Styles */
+        .calc-wrapper {
+            margin-top: var(--sp-16);
+            background: #fff;
+            border-radius: var(--radius-2xl);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            border: 1px solid var(--color-border);
+            padding: var(--sp-10);
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: var(--sp-10);
+            align-items: center;
+        }
+        .calc-options h3 { font-size: var(--fs-2xl); margin-bottom: var(--sp-6); }
+        .calc-group { margin-bottom: var(--sp-6); }
+        .calc-group label { font-weight: var(--fw-bold); display: block; margin-bottom: var(--sp-2); color: var(--color-text); }
+        .calc-select { 
+            width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: var(--fs-base); font-family: inherit; font-weight: var(--fw-semibold); color: var(--color-text); outline: none; transition: border-color 0.2s;
+        }
+        .calc-select:focus { border-color: var(--color-teal); }
+        
+        .calc-toggle { display: flex; gap: var(--sp-2); }
+        .calc-btn { flex: 1; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; background: #fff; font-weight: var(--fw-bold); cursor: pointer; transition: all 0.2s; color: #64748b;}
+        .calc-btn.active { border-color: var(--color-teal); background: rgba(20, 184, 166, 0.1); color: var(--color-teal); }
+
+        .calc-result {
+            background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-primary-dark) 100%);
+            border-radius: var(--radius-xl);
+            padding: var(--sp-8);
+            color: #fff;
+            text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .calc-result::before { content: ''; position: absolute; top: -50px; left: -50px; width: 200px; height: 200px; background: rgba(20, 184, 166, 0.2); border-radius: 50%; filter: blur(40px); }
+        .calc-price { font-size: 64px; font-weight: 900; line-height: 1; margin: var(--sp-4) 0; text-shadow: 0 4px 20px rgba(20,184,166,0.4); transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .calc-price span { font-size: 24px; vertical-align: top; margin-right: 4px; color: var(--color-teal-light); }
+        
+        .calc-form { margin-top: var(--sp-6); display: flex; flex-direction: column; gap: var(--sp-3); }
+        .calc-input { padding: 14px; border: none; border-radius: 8px; font-size: var(--fs-base); font-family: inherit; }
+        .calc-submit { background: var(--color-teal); color: #fff; border: none; padding: 14px; border-radius: 8px; font-weight: 900; cursor: pointer; transition: background 0.2s; font-size: 16px;}
+        .calc-submit:hover { background: var(--color-teal-light); }
+
+        @media (max-width: 900px) {
+            .calc-wrapper { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ============ NAVBAR ============ -->
+<a href="#main-content" class="visually-hidden">Skip to main content</a>
+<header class="navbar" id="navbar">
+    <div class="container navbar-inner">
+        <a href="index.html" class="navbar-logo" aria-label="UrbanFlow Works — Home">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect width="32" height="32" rx="8" fill="var(--color-primary)" />
+                <path d="M9 17c0 3.31 2.69 6 6 6h1c3.31 0 6-2.69 6-6v-3" stroke="var(--color-teal-light)" stroke-width="2.2" stroke-linecap="round" />
+                <path d="M23 15c0-3.31-2.69-6-6-6h-1c-3.31 0-6 2.69-6 6v3" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" />
+            </svg>
+            <span>UrbanFlow Works</span>
+        </a>
+
+        <nav id="navbar-links" class="navbar-links" aria-label="Primary navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="apps.html" class="nav-link">Apps</a>
+            <a href="course.html" class="nav-link">Course</a>
+            <a href="generator.html" class="nav-link" style="color: var(--color-primary); font-weight: 700;">Demo Generator</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="services.html#pricing" class="btn btn-primary btn-sm navbar-cta">Start Building</a>
+        </nav>
+
+        <button id="navbar-toggle" class="navbar-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navbar-links">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+    <main id="main-content">
+        <!-- ============ PAGE HERO ============ -->
+        <section class="page-hero">
+            <div class="container">
+                <span class="badge-pulse reveal">Launch Your Business</span>
+                <h1 class="reveal" style="font-size: var(--fs-5xl); line-height: 1.1; margin-bottom: var(--sp-6);">
+                    Own your software.<br>
+                    <span class="highlight-text">Zero Monthly Fees.</span>
+                </h1>
+                <p class="reveal" style="font-size: var(--fs-xl); max-width: 700px; margin: 0 auto; color: var(--color-text);">
+                    We build premium Apps and Websites. You pay <strong>one time</strong>. We leverage the powerful free tiers of Firebase, Supabase, and Cloudflare so you never worry about server bills again.
+                </p>
+                <div class="hero-actions reveal" style="margin-top: var(--sp-10);">
+                    <a href="#pricing" class="btn btn-primary btn-lg" style="font-size: var(--fs-lg); padding: 1.2rem 3rem; border-radius: var(--radius-full); box-shadow: 0 10px 25px rgba(13, 148, 136, 0.4); background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-light) 100%);">See Our Packages</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ THE NO-BRAINER BENEFITS ============ -->
+        <section class="section section--surface">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2 class="section-title">Why it's an absolute no-brainer</h2>
+                </div>
+                <div class="grid grid--3 stagger">
+                    <div class="card reveal--scale" style="text-align: center; border-top: 4px solid var(--color-teal);">
+                        <div class="card-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981; margin: 0 auto var(--sp-6);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <h3 class="card-title">Pay Once. Never Again.</h3>
+                        <p class="card-text">Tired of Shopify or Wix subscriptions? We build on Firebase & Cloudflare's massive free tiers. Your monthly hosting cost? <strong>$0.00.</strong></p>
+                    </div>
+                    <div class="card reveal--scale" style="text-align: center; border-top: 4px solid var(--color-primary);">
+                        <div class="card-icon" style="background: var(--color-primary-50); color: var(--color-primary); margin: 0 auto var(--sp-6);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                        </div>
+                        <h3 class="card-title">100% Mobile Managed</h3>
+                        <p class="card-text">You don't even need a PC. Manage products, orders, bookings, and users entirely from your smartphone while on the go.</p>
+                    </div>
+                    <div class="card reveal--scale" style="text-align: center; border-top: 4px solid var(--color-gold);">
+                        <div class="card-icon" style="background: #fffbeb; color: var(--color-gold); margin: 0 auto var(--sp-6);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <h3 class="card-title">Free Admin App Included</h3>
+                        <p class="card-text">Every project comes with a dedicated, custom Admin App so you have total control over your business ecosystem right out of the box.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ CATEGORIES ============ -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Tailored For You</span>
+                    <h2 class="section-title">Built for any industry</h2>
+                    <p class="section-description">Whether you sell products or provide services, we give you the digital keys to dominate your local market.</p>
+                </div>
+                <div class="category-grid stagger">
+                    <div class="category-pill reveal--scale">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.29 2.83A2 2 0 0 0 6.26 19h11.48M10 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>
+                        E-Commerce
+                    </div>
+                    <div class="category-pill reveal--scale">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
+                        Restaurants
+                    </div>
+                    <div class="category-pill reveal--scale">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.77z"/></svg>
+                        Plumbers
+                    </div>
+                    <div class="category-pill reveal--scale">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        Electricians
+                    </div>
+                    <div class="category-pill reveal--scale">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        Consultancies
+                    </div>
+                    <div class="category-pill reveal--scale">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                        Real Estate
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ PRICING ============ -->
+        <section id="pricing" class="section section--surface" aria-labelledby="pricing-heading">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="badge-pulse">One-Time Payment Only</span>
+                    <h2 class="section-title">Simple, transparent packages</h2>
+                    
+                    <div class="currency-switcher">
+                        <span id="label-usd" class="curr-label curr-active">USD ($)</span>
+                        <label class="switch">
+                          <input type="checkbox" id="currency-toggle">
+                          <span class="slider"></span>
+                        </label>
+                        <span id="label-inr" class="curr-label curr-inactive">INR (₹)</span>
+                    </div>
+                </div>
+                <div class="grid grid--3 stagger">
+                    <!-- Website Package -->
+                    <div class="pricing-card reveal--scale">
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">Business Website</h3>
+                            <div class="pricing-price" style="font-size: var(--fs-4xl);"><span class="price-val" data-usd="$50" data-inr="₹4,000">$50</span><span style="font-size: var(--fs-base); color: var(--color-text-secondary); font-weight: var(--fw-medium);"> (Flexible)</span></div>
+                            <p class="pricing-desc">Fast, responsive, and SEO-optimized.</p>
+                        </div>
+                        <div class="pricing-features">
+                            <div class="pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> <strong style="color:var(--color-teal); margin-right:4px;">$0</strong> Monthly Hosting</div>
+                            <div class="pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Custom UI/UX Design</div>
+                            <div class="pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Fast Global Delivery (Cloudflare)</div>
+                            <div class="pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Mobile Responsive</div>
+                            <div class="pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> <strong>Free Admin Dashboard</strong></div>
+                        </div>
+                        <a href="contact.html" class="btn btn-outline" style="width: 100%; margin-bottom: var(--sp-4);">Start Project</a>
+                        <div style="font-size: var(--fs-xs); color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--sp-3); font-weight: var(--fw-bold);">Explore Live Demos</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: var(--sp-2);">
+                            <a href="demos/demo-electrician.html" class="demo-chip">⚡ Electrician</a>
+                            <a href="demos/demo-plumber.html" class="demo-chip">🚰 Plumber</a>
+                            <a href="demos/demo-restaurant.html" class="demo-chip">🍔 Restaurant</a>
+                            <a href="demos/demo-freelancer.html" class="demo-chip">💼 Freelancer</a>
+                        </div>
+                    </div>
+
+                    <!-- Android App -->
+                    <div class="pricing-card reveal--scale">
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">Android App</h3>
+                            <div class="pricing-price" style="font-size: var(--fs-4xl);"><span class="price-val" data-usd="$1,000" data-inr="₹83,000">$1,000</span></div>
+                            <p class="pricing-desc">Native-quality Android app built with Flutter.</p>
+                        </div>
+                        <div class="pricing-features">
+                            <div class="pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> <strong style="color:var(--color-teal); margin-right:4px;">$0</strong> Monthly Server Bills</div>
+                            <div class="pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Google Play Store Setup</div>
+                            <div class="pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Push Notifications</div>
+                            <div class="pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Shared Database (Firebase/Supabase)</div>
+                            <div class="pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> <strong>Free Admin Mobile App</strong></div>
+                        </div>
+                        <a href="contact.html" class="btn btn-outline">Start Project</a>
+                    </div>
+
+                    <!-- iOS App -->
+                    <div class="pricing-card pricing-card--popular reveal--scale">
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">iOS App</h3>
+                            <div class="pricing-price" style="font-size: var(--fs-4xl);"><span class="price-val" data-usd="$2,000" data-inr="₹166,000">$2,000</span></div>
+                            <p class="pricing-desc">Premium iOS experience built with Flutter.</p>
+                        </div>
+                        <div class="pricing-features">
+                            <div class="pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> <strong style="color:var(--color-teal); margin-right:4px;">$0</strong> Monthly Server Bills</div>
+                            <div class="pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Apple App Store Setup</div>
+                            <div class="pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Push Notifications</div>
+                            <div class="pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Shared Database (Firebase/Supabase)</div>
+                            <div class="pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> <strong>Free Admin Mobile App</strong></div>
+                        </div>
+                        <a href="contact.html" class="btn btn-primary" style="background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-light) 100%);">Start Project</a>
+                    </div>
+                </div>
+
+                <!-- Project Cost Calculator -->
+                <div class="calc-wrapper reveal--scale">
+                    <div class="calc-options">
+                        <h3>Interactive Cost Estimator</h3>
+                        
+                        <div class="calc-group">
+                            <label>What platform do you need?</label>
+                            <select id="calcPlatform" class="calc-select">
+                                <option value="50">Business Website ($50)</option>
+                                <option value="1000">Android App ($1000)</option>
+                                <option value="2000">iOS App ($2000)</option>
+                                <option value="3000">Full Ecosystem - Web + Both Apps ($3000)</option>
+                            </select>
+                        </div>
+
+                        <div class="calc-group">
+                            <label>Do you need User Login / Accounts?</label>
+                            <div class="calc-toggle">
+                                <button type="button" class="calc-btn active" data-target="calcAccounts" data-val="0">No</button>
+                                <button type="button" class="calc-btn" data-target="calcAccounts" data-val="100">Yes (+$100)</button>
+                                <input type="hidden" id="calcAccounts" value="0">
+                            </div>
+                        </div>
+
+                        <div class="calc-group">
+                            <label>Do you need E-Commerce / Payments?</label>
+                            <div class="calc-toggle">
+                                <button type="button" class="calc-btn active" data-target="calcEcom" data-val="0">No</button>
+                                <button type="button" class="calc-btn" data-target="calcEcom" data-val="200">Yes (+$200)</button>
+                                <input type="hidden" id="calcEcom" value="0">
+                            </div>
+                        </div>
+
+                        <div class="calc-group" style="margin-bottom:0;">
+                            <label>Include Admin Dashboard?</label>
+                            <div class="calc-toggle">
+                                <button type="button" class="calc-btn active" style="border-color: var(--color-teal); background: rgba(20, 184, 166, 0.1); color: var(--color-teal); cursor: default;">Yes, Free ($0)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="calc-result">
+                        <div style="font-weight: var(--fw-bold); text-transform: uppercase; letter-spacing: 1px; color: #cbd5e1;">Estimated Total</div>
+                        <div class="calc-price" id="calcTotal"><span>$</span>50</div>
+                        <p style="font-size: var(--fs-sm); color: #94a3b8; margin-bottom: var(--sp-6);">One-time payment. Zero monthly hosting fees.</p>
+                        
+                        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: var(--sp-6);">
+                            <div style="font-weight: var(--fw-bold); margin-bottom: var(--sp-2);">Lock in this price + 10% Off</div>
+                            <p style="font-size: 13px; color: #94a3b8; line-height:1.4;">Enter your email to receive a detailed PDF proposal and your discount code.</p>
+                            <form class="calc-form" onsubmit="event.preventDefault(); alert('Proposal sent successfully! Check your email.');">
+                                <input type="email" class="calc-input" placeholder="Your work email..." required>
+                                <button type="submit" class="calc-submit">Get Detailed Proposal</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bonus-box reveal--scale">
+                    <div class="bonus-box-content">
+                        <h3>🎁 The UrbanFlow Guarantee</h3>
+                        <p style="font-size: var(--fs-lg); opacity: 0.9; max-width: 600px; margin: 0 auto var(--sp-6);">
+                            We build it. We hand over the keys. You own it forever. Manage your entire empire straight from the palm of your hand.
+                        </p>
+                        <a href="contact.html" class="btn btn-primary" style="background: #fff; color: var(--color-primary-dark);">Let's Build It Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="navbar-logo">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                        <rect width="32" height="32" rx="8" fill="var(--color-teal)" />
+                        <path d="M9 17c0 3.31 2.69 6 6 6h1c3.31 0 6-2.69 6-6v-3" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" />
+                        <path d="M23 15c0-3.31-2.69-6-6-6h-1c-3.31 0-6 2.69-6 6v3" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round" />
+                    </svg>
+                    <span>UrbanFlow Works</span>
+                </a>
+                <p>Simple, scalable and reliable software — built with intent, not shortcuts.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <div class="footer-links">
+                    <a href="about.html">About</a>
+                    <a href="services.html">Services</a>
+                    <a href="apps.html">Apps</a>
+                    <a href="course.html">Course</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms &amp; Conditions</a>
+                    <a href="account-deletion.html">Account Deletion</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Products</h4>
+                <div class="footer-links">
+                    <a href="apps.html">Niyaz Mocks</a>
+                    <a href="apps.html">More Coming Soon</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 UrbanFlow Works. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="#" aria-label="UrbanFlow Works on GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.48v-1.87c-2.78.62-3.37-1.37-3.37-1.37-.46-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.36 1.11 2.93.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.9-1.3 2.75-1.03 2.75-1.03.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.81-4.58 5.06.36.32.68.94.68 1.9v2.82c0 .26.18.58.69.48A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z" />
+                    </svg>
+                </a>
+                <a href="#" aria-label="UrbanFlow Works on LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2 3.77-2 4.03 0 4.78 2.6 4.78 6v6.3H18v-5.6c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.97V21H10V9z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- ============ LIVE CHAT WIDGET ============ -->
+    <div class="chat-fab" id="chatFab" onclick="toggleChat()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 28px; height: 28px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div class="chat-badge">1</div>
+    </div>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h4>UrbanFlow Support</h4>
+            <button class="chat-close" onclick="toggleChat()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="chat-body">
+            <div class="chat-msg">
+                <strong>Niyaz</strong> (Founder)<br>
+                Hey there! 👋 Do you have any questions about our Website or App packages?
+            </div>
+            
+            <form id="chatForm" class="chat-form" onsubmit="event.preventDefault(); submitChat();">
+                <input type="email" class="chat-input" placeholder="Your email address" required>
+                <textarea class="chat-textarea" placeholder="Type your message..." required></textarea>
+                <button type="submit" class="chat-btn" id="chatBtn">Send Message</button>
+            </form>
+            <p style="font-size: 11px; color: var(--color-text-muted); text-align: center; margin-top: 12px;">We usually reply within a few hours.</p>
+        </div>
+    </div>
+
+    <script src="js/navbar.js" defer></script>
+    <script src="js/animations.js" defer></script>
+    <script src="js/script.js" defer></script>
+    <script>
+        // Currency Switcher Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.getElementById('currency-toggle');
+            const labelUsd = document.getElementById('label-usd');
+            const labelInr = document.getElementById('label-inr');
+            const priceElements = document.querySelectorAll('.price-val');
+
+            toggle.addEventListener('change', (e) => {
+                const isINR = e.target.checked;
+                
+                // Update Labels
+                if (isINR) {
+                    labelInr.classList.replace('curr-inactive', 'curr-active');
+                    labelUsd.classList.replace('curr-active', 'curr-inactive');
+                } else {
+                    labelUsd.classList.replace('curr-inactive', 'curr-active');
+                    labelInr.classList.replace('curr-active', 'curr-inactive');
+                }
+
+                // Update Prices
+                priceElements.forEach(el => {
+                    if (isINR) {
+                        el.textContent = el.getAttribute('data-inr');
+                    } else {
+                        el.textContent = el.getAttribute('data-usd');
+                    }
+                });
+            });
+        });
+        
+
+        // Calculator Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const platformSelect = document.getElementById('calcPlatform');
+            const accountsInput = document.getElementById('calcAccounts');
+            const ecomInput = document.getElementById('calcEcom');
+            const totalDisplay = document.getElementById('calcTotal');
+            const currencyToggle = document.getElementById('currency-toggle');
+            
+            const calcBtns = document.querySelectorAll('.calc-toggle .calc-btn[data-target]');
+            
+            // INR conversion rate approximation
+            const usdToInr = 83;
+            
+            function updateTotal() {
+                const base = parseInt(platformSelect.value) || 0;
+                const accounts = parseInt(accountsInput.value) || 0;
+                const ecom = parseInt(ecomInput.value) || 0;
+                
+                let total = base + accounts + ecom;
+                let symbol = '$';
+                
+                // Handle global currency toggle
+                if (currencyToggle && currencyToggle.checked) {
+                    total = total * usdToInr;
+                    symbol = '₹';
+                }
+                
+                // Animate number change
+                totalDisplay.style.transform = 'scale(1.15)';
+                totalDisplay.innerHTML = `<span>${symbol}</span>${total.toLocaleString()}`;
+                setTimeout(() => {
+                    totalDisplay.style.transform = 'scale(1)';
+                }, 150);
+            }
+
+            if (platformSelect) {
+                platformSelect.addEventListener('change', updateTotal);
+            }
+            if (currencyToggle) {
+                currencyToggle.addEventListener('change', updateTotal);
+            }
+
+            calcBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const targetId = btn.getAttribute('data-target');
+                    const targetInput = document.getElementById(targetId);
+                    
+                    // Remove active class from siblings
+                    const siblings = btn.parentElement.querySelectorAll('.calc-btn');
+                    siblings.forEach(s => s.classList.remove('active'));
+                    
+                    // Add active to clicked
+                    btn.classList.add('active');
+                    
+                    // Update hidden input value
+                    targetInput.value = btn.getAttribute('data-val');
+                    
+                    updateTotal();
+                });
+            });
+        });
+
+        // Chat Widget Logic
+        function toggleChat() {
+            const win = document.getElementById('chatWindow');
+            const fab = document.getElementById('chatFab');
+            win.classList.toggle('open');
+            // Hide badge once opened
+            const badge = fab.querySelector('.chat-badge');
+            if(badge) badge.style.display = 'none';
+        }
+
+        function submitChat() {
+            const btn = document.getElementById('chatBtn');
+            btn.innerHTML = 'Sending...';
+            
+            setTimeout(() => {
+                btn.classList.add('sent');
+                btn.innerHTML = 'Message Sent! ✓';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Demo Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #0f172a; font-family: 'Inter', sans-serif; overflow: hidden; display: flex; flex-direction: column; }
+        
+        .top-bar { height: 60px; background: #1e293b; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; color: #fff; flex-shrink: 0;}
+        
+        .brand { font-weight: 700; display: flex; align-items: center; gap: 8px; color: #fff; text-decoration: none; }
+        .brand svg { width: 24px; height: 24px; color: #14b8a6; }
+        
+        .device-toggle { display: flex; background: #0f172a; padding: 4px; border-radius: 8px; border: 1px solid #334155; }
+        .toggle-btn { background: transparent; border: none; color: #94a3b8; padding: 6px 12px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-weight: 600; font-family: inherit; transition: all 0.2s;}
+        .toggle-btn:hover { color: #fff; }
+        .toggle-btn.active { background: #334155; color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        .toggle-btn svg { width: 18px; height: 18px; }
+        
+        .close-btn { background: #334155; color: #fff; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 600; transition: background 0.2s; }
+        .close-btn:hover { background: #475569; }
+
+        .preview-container { flex: 1; display: flex; justify-content: center; align-items: center; background: #0f172a; padding: 20px; overflow: hidden; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        iframe { border: none; background: #fff; width: 100%; height: 100%; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 0; box-shadow: none; }
+        
+        /* Mobile State */
+        .is-mobile .preview-container { padding: 40px; }
+        .is-mobile iframe { width: 375px; height: 812px; border-radius: 40px; box-shadow: 0 0 0 12px #1e293b, 0 25px 50px -12px rgba(0,0,0,0.5); }
+
+        /* Actual Mobile Device Screen */
+        @media (max-width: 768px) {
+            .device-toggle { display: none; }
+            .brand { font-size: 14px; }
+            .brand svg { width: 20px; height: 20px; }
+            .preview-container { padding: 0 !important; }
+            .is-mobile iframe, iframe { width: 100% !important; height: 100% !important; border-radius: 0 !important; box-shadow: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="index.html" class="brand">
+            <svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 17c0 3.31 2.69 6 6 6h1c3.31 0 6-2.69 6-6v-3" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><path d="M23 15c0-3.31-2.69-6-6-6h-1c-3.31 0-6 2.69-6 6v3" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round"/></svg>
+            UrbanFlow Preview
+        </a>
+        
+        <div class="device-toggle">
+            <button class="toggle-btn active" id="btn-desktop">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                Desktop
+            </button>
+            <button class="toggle-btn" id="btn-mobile">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                Mobile
+            </button>
+        </div>
+        
+        <a href="generator.html" class="close-btn">Close Preview</a>
+    </div>
+
+    <div class="preview-container" id="preview-container">
+        <iframe id="demo-frame" src=""></iframe>
+    </div>
+
+    <script>
+        const btnDesktop = document.getElementById('btn-desktop');
+        const btnMobile = document.getElementById('btn-mobile');
+        const container = document.getElementById('preview-container');
+        const frame = document.getElementById('demo-frame');
+
+        // Parse URL params
+        const params = new URLSearchParams(window.location.search);
+        const target = params.get('target');
+        const name = params.get('name') || '';
+        const email = params.get('email') || '';
+        const cat = params.get('cat') || '';
+
+        if (target) {
+            frame.src = `${target}?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&cat=${encodeURIComponent(cat)}`;
+        } else {
+            frame.src = "demo.html";
+        }
+
+        btnDesktop.addEventListener('click', () => {
+            document.body.classList.remove('is-mobile');
+            btnDesktop.classList.add('active');
+            btnMobile.classList.remove('active');
+        });
+
+        btnMobile.addEventListener('click', () => {
+            document.body.classList.add('is-mobile');
+            btnMobile.classList.add('active');
+            btnDesktop.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,244 +1,358 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact — UrbanFlow Works</title>
-  <meta name="description"
-    content="Get in touch with UrbanFlow Works for support, feedback, or project inquiries about Niyaz Mocks and our other products.">
-  <link rel="canonical" href="https://urbanflowworks.com/contact.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Contact — UrbanFlow Works">
-  <meta property="og:description"
-    content="Get in touch with UrbanFlow Works for support, feedback, or project inquiries about Niyaz Mocks and our other products.">
-  <meta property="og:url" content="https://urbanflowworks.com/contact.html">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Contact — UrbanFlow Works">
-  <meta name="twitter:description"
-    content="Get in touch with UrbanFlow Works for support, feedback, or project inquiries about Niyaz Mocks and our other products.">
-  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/responsive.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — UrbanFlow Works</title>
+    <meta name="description" content="Let's build something exceptional. Book a consultation or tell us about your next big project.">
+    
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
 
+    <style>
+        .navbar { background: rgba(255, 255, 255, 0.95) !important; box-shadow: var(--shadow-sm); }
+        .navbar::before { content: ""; position: absolute; inset: 0; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: -1; }
+        
+        /* Contact Hero */
+        .contact-hero {
+            background: #f8fafc;
+            padding: calc(var(--sp-24) + 60px) 0 var(--sp-20);
+            text-align: center;
+        }
+        .contact-hero h1 { font-size: clamp(40px, 5vw, 64px); letter-spacing: -2px; line-height: 1.1; margin-bottom: var(--sp-4); }
+        .contact-hero p { color: var(--color-text-secondary); font-size: var(--fs-xl); max-width: 600px; margin: 0 auto; }
+
+        /* Discovery Section */
+        .discovery-section { padding: var(--sp-20) 0; background: #fff; }
+        .discovery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-12); align-items: start; }
+        
+        /* The Form */
+        .discovery-form {
+            background: #fff; padding: var(--sp-10); border-radius: var(--radius-2xl);
+            border: 1px solid var(--color-border); box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+        .form-group { margin-bottom: var(--sp-6); }
+        .form-label { display: block; font-weight: 600; margin-bottom: var(--sp-2); font-size: 14px; }
+        .form-input { 
+            width: 100%; padding: 14px 16px; border: 1px solid var(--color-border); 
+            border-radius: var(--radius-lg); font-size: 16px; font-family: inherit; transition: all 0.3s;
+            background: #f8fafc;
+        }
+        .form-input:focus { border-color: var(--color-teal); background: #fff; outline: none; box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.1); }
+        
+        /* Custom Radio/Chips */
+        .chip-group { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+        .chip-label {
+            padding: 10px 20px; border: 1px solid var(--color-border); border-radius: 100px;
+            font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s;
+            background: #fff; color: var(--color-text-secondary);
+        }
+        .chip-radio { display: none; }
+        .chip-radio:checked + .chip-label {
+            background: var(--color-teal); border-color: var(--color-teal); color: #fff;
+            transform: scale(1.05); box-shadow: 0 4px 10px rgba(20, 184, 166, 0.3);
+        }
+        
+        /* Form Button */
+        .submit-btn {
+            width: 100%; padding: 16px; background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-light) 100%);
+            color: #fff; border: none; border-radius: var(--radius-lg); font-size: var(--fs-lg); font-weight: 800;
+            cursor: pointer; transition: all 0.3s; margin-top: var(--sp-4); position: relative; overflow: hidden;
+        }
+        .submit-btn:hover { box-shadow: 0 10px 25px rgba(20, 184, 166, 0.4); transform: translateY(-2px); }
+        .submit-btn.success { background: #10b981; pointer-events: none; }
+
+        /* Fake Scheduler UI */
+        .scheduler-ui {
+            background: #0f172a; padding: var(--sp-10); border-radius: var(--radius-2xl); color: #fff;
+            box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15); border: 1px solid rgba(255,255,255,0.1);
+        }
+        .scheduler-ui h3 { font-size: var(--fs-2xl); margin-bottom: var(--sp-2); color: #fff; }
+        .scheduler-ui p { color: #94a3b8; margin-bottom: var(--sp-8); }
+        
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center; margin-bottom: var(--sp-6);}
+        .cal-day-name { font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase; }
+        .cal-day { 
+            aspect-ratio: 1; display: flex; align-items: center; justify-content: center; 
+            border-radius: 50%; font-size: 14px; cursor: pointer; transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        .cal-day:hover { background: rgba(255,255,255,0.1); }
+        .cal-day.active { background: var(--color-teal); color: #fff; font-weight: bold; box-shadow: 0 0 15px rgba(20, 184, 166, 0.5); transform: scale(1.1);}
+        .cal-day.disabled { color: #334155; pointer-events: none; }
+
+        .time-slots { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; opacity: 0; transform: translateY(10px); transition: all 0.3s; pointer-events: none; }
+        .time-slots.show { opacity: 1; transform: translateY(0); pointer-events: all; }
+        .time-slot {
+            padding: 12px; text-align: center; border: 1px solid rgba(20, 184, 166, 0.5); 
+            border-radius: var(--radius-lg); color: var(--color-teal-light); font-weight: 600;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .time-slot:hover, .time-slot.selected { background: var(--color-teal); color: #fff; border-color: var(--color-teal); }
+
+        /* Direct Info */
+        .direct-info { margin-top: var(--sp-8); display: flex; flex-direction: column; gap: var(--sp-4); padding-top: var(--sp-8); border-top: 1px solid rgba(255,255,255,0.1);}
+        .direct-row { display: flex; align-items: center; gap: var(--sp-4); color: #e2e8f0; }
+        .direct-row svg { color: var(--color-teal); width: 20px; height: 20px; }
+
+        @media (max-width: 900px) {
+            .discovery-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
 <body>
 
-  <a href="#main-content" class="visually-hidden">Skip to main content</a>
-
-  <header class="navbar" id="navbar">
+    <!-- ============ NAVBAR ============ -->
+<a href="#main-content" class="visually-hidden">Skip to main content</a>
+<header class="navbar" id="navbar">
     <div class="container navbar-inner">
-      <a href="index.html" class="navbar-logo" aria-label="UrbanFlow Works — Home">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true">
-          <rect width="32" height="32" rx="8" fill="var(--color-primary)" />
-          <path d="M9 17c0 3.31 2.69 6 6 6h1c3.31 0 6-2.69 6-6v-3" stroke="var(--color-teal-light)" stroke-width="2.2"
-            stroke-linecap="round" />
-          <path d="M23 15c0-3.31-2.69-6-6-6h-1c-3.31 0-6 2.69-6 6v3" stroke="#ffffff" stroke-width="2.2"
-            stroke-linecap="round" />
-        </svg>
-        <span>UrbanFlow Works</span>
-      </a>
-      <nav id="navbar-links" class="navbar-links" aria-label="Primary navigation">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="about.html" class="nav-link">About</a>
-        <a href="apps.html" class="nav-link">Apps</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-        <a href="contact.html" class="btn btn-primary btn-sm navbar-cta">Get in Touch</a>
-      </nav>
-      <button id="navbar-toggle" class="navbar-toggle" aria-label="Toggle menu" aria-expanded="false"
-        aria-controls="navbar-links">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
-
-  <main id="main-content">
-
-    <section class="page-hero">
-      <div class="container">
-        <span class="section-label reveal">Get In Touch</span>
-        <h1 class="reveal">Contact UrbanFlow Works</h1>
-        <p class="reveal">Have a question, feedback, or a project idea? We would love to hear from you.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="contact-grid">
-          <div class="contact-info reveal--left">
-            <h3>Let's talk</h3>
-            <p>Whether you have a question about Niyaz Mocks, need support, or want to discuss a project, our team is
-              here to help.</p>
-
-            <div class="contact-item">
-              <div class="contact-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <rect x="2" y="4" width="20" height="16" rx="2" />
-                  <path d="M2 6l10 7 10-7" />
-                </svg>
-              </div>
-              <div>
-                <h4>Email</h4>
-                <p>niyazqadri97@gmail.com</p>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <path d="M12 2 3 6v6c0 5 4 9 9 10 5-1 9-5 9-10V6l-9-4z" />
-                </svg>
-              </div>
-              <div>
-                <h4>Location</h4>
-                <p>Islampur, West Bengal, India, 733202</p>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <circle cx="12" cy="12" r="9" />
-                  <path d="M12 7v5l3 3" />
-                </svg>
-              </div>
-              <div>
-                <h4>Response Time</h4>
-                <p>We typically respond within 1–2 business days.</p>
-              </div>
-            </div>
-          </div>
-
-          <form id="contact-form" class="reveal--right" novalidate>
-            <div class="form-group">
-              <label class="form-label" for="contact-name">Full Name</label>
-              <input class="form-input" type="text" id="contact-name" name="name" placeholder="Your name" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="contact-email">Email Address</label>
-              <input class="form-input" type="email" id="contact-email" name="email" placeholder="you@example.com"
-                required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="contact-app">App or Product</label>
-
-              <select class="form-input" id="contact-app" name="app" required>
-
-                <option value="" selected disabled>Select an App or Product</option>
-
-                <option>Niyaz Mocks</option>
-
-                <option>Lumina Fees Collector</option>
-
-                <option>UrbanFlow Works Website</option>
-
-                <option>Other</option>
-
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="contact-subject">Subject</label>
-              <select class="form-input" id="contact-subject" name="subject" required>
-                <option value="" selected disabled>Select a Subject</option>
-                <option>General Inquiry</option>
-                <option>Technical Support</option>
-                <option>Bug Report</option>
-                <option>Feature Request</option>
-                <option>Account Deletion</option>
-                <option>Billing / Subscription</option>
-                <option>Business Inquiry</option>
-                <option>Partnership</option>
-                <option>Feedback</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="contact-message">Message</label>
-              <textarea class="form-textarea" id="contact-message" name="message" placeholder="Tell us more..."
-                required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="index.html" class="navbar-logo">
-            <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true">
-              <rect width="32" height="32" rx="8" fill="var(--color-teal)" />
-              <path d="M9 17c0 3.31 2.69 6 6 6h1c3.31 0 6-2.69 6-6v-3" stroke="#ffffff" stroke-width="2.2"
-                stroke-linecap="round" />
-              <path d="M23 15c0-3.31-2.69-6-6-6h-1c-3.31 0-6 2.69-6 6v3" stroke="#0f172a" stroke-width="2.2"
-                stroke-linecap="round" />
+        <a href="index.html" class="navbar-logo" aria-label="UrbanFlow Works — Home">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect width="32" height="32" rx="8" fill="var(--color-primary)" />
+                <path d="M9 17c0 3.31 2.69 6 6 6h1c3.31 0 6-2.69 6-6v-3" stroke="var(--color-teal-light)" stroke-width="2.2" stroke-linecap="round" />
+                <path d="M23 15c0-3.31-2.69-6-6-6h-1c-3.31 0-6 2.69-6 6v3" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" />
             </svg>
             <span>UrbanFlow Works</span>
-          </a>
-          <p>Simple, scalable and reliable software — built with intent, not shortcuts.</p>
-        </div>
-        <div class="footer-column">
-          <h4>Company</h4>
-          <div class="footer-links">
-            <a href="about.html">About</a>
-            <a href="apps.html">Apps</a>
-            <a href="contact.html">Contact</a>
-          </div>
-        </div>
-        <div class="footer-column">
-          <h4>Legal</h4>
-          <div class="footer-links">
-            <a href="privacy-policy.html">Privacy Policy</a>
-            <a href="terms.html">Terms &amp; Conditions</a>
-            <a href="account-deletion.html">Account Deletion</a>
-          </div>
-        </div>
-        <div class="footer-column">
-          <h4>Products</h4>
-          <div class="footer-links">
-            <a href="apps.html">Niyaz Mocks</a>
-            <a href="apps.html">More Coming Soon</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 UrbanFlow Works. All rights reserved.</p>
-        <div class="footer-social">
-          <a href="#" aria-label="UrbanFlow Works on GitHub">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 2C6.48 2 2 6.58 2 12.25c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.48v-1.87c-2.78.62-3.37-1.37-3.37-1.37-.46-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.36 1.11 2.93.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.9-1.3 2.75-1.03 2.75-1.03.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.81-4.58 5.06.36.32.68.94.68 1.9v2.82c0 .26.18.58.69.48A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z" />
-            </svg>
-          </a>
-          <a href="#" aria-label="UrbanFlow Works on LinkedIn">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2 3.77-2 4.03 0 4.78 2.6 4.78 6v6.3H18v-5.6c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.97V21H10V9z" />
-            </svg>
-          </a>
-        </div>
-      </div>
+        </a>
+
+        <nav id="navbar-links" class="navbar-links" aria-label="Primary navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="apps.html" class="nav-link">Apps</a>
+            <a href="course.html" class="nav-link">Course</a>
+            <a href="generator.html" class="nav-link" style="color: var(--color-primary); font-weight: 700;">Demo Generator</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="services.html#pricing" class="btn btn-primary btn-sm navbar-cta">Start Building</a>
+        </nav>
+
+        <button id="navbar-toggle" class="navbar-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navbar-links">
+            <span></span><span></span><span></span>
+        </button>
     </div>
-  </footer>
+</header>
 
-  <script src="js/navbar.js" defer></script>
-  <script src="js/animations.js" defer></script>
-  <script src="js/script.js" defer></script>
-  <script src="js/contact.js" defer></script>
+    <main id="main-content">
+        
+        <!-- ============ HERO ============ -->
+        <section class="contact-hero">
+            <div class="container">
+                <span class="reveal" style="background: rgba(20, 184, 166, 0.1); color: var(--color-teal); padding: 8px 16px; border-radius: 100px; font-weight: 700; font-size: 14px; letter-spacing: 1px; text-transform: uppercase;">Project Discovery</span>
+                <h1 class="reveal" style="margin-top: var(--sp-6);">Let's build something <br><span style="color: var(--color-teal);">exceptional.</span></h1>
+                <p class="reveal">Tell us what you want to build, or pick a time on the calendar to discuss your architecture directly with our founder.</p>
+            </div>
+        </section>
+
+        <!-- ============ DISCOVERY GRID ============ -->
+        <section class="discovery-section">
+            <div class="container discovery-grid">
+                
+                <!-- The Form -->
+                <div class="discovery-form reveal--scale">
+                    <form onsubmit="event.preventDefault(); submitDiscovery();">
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-input" placeholder="e.g. John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-input" placeholder="john@company.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">What are we building?</label>
+                            <div class="chip-group">
+                                <input type="radio" name="project_type" id="type_web" class="chip-radio" checked>
+                                <label for="type_web" class="chip-label">Website</label>
+                                
+                                <input type="radio" name="project_type" id="type_android" class="chip-radio">
+                                <label for="type_android" class="chip-label">Android App</label>
+                                
+                                <input type="radio" name="project_type" id="type_ios" class="chip-radio">
+                                <label for="type_ios" class="chip-label">iOS App</label>
+
+                                <input type="radio" name="project_type" id="type_both" class="chip-radio">
+                                <label for="type_both" class="chip-label">Mobile App (Both)</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Project Details</label>
+                            <textarea class="form-input" style="height: 120px; resize: none;" placeholder="Tell us briefly what this software needs to do..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="discoveryBtn">Submit Project Request</button>
+                    </form>
+                </div>
+
+                <!-- Scheduler UI -->
+                <div class="scheduler-ui reveal--left">
+                    <h3>Schedule a Call</h3>
+                    <p>Book a 15-minute technical discovery call.</p>
+                    
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px; font-weight: bold; font-size: 14px;">
+                        <span>August 2026</span>
+                        <div style="display:flex; gap: 8px;">
+                            <span style="color:#64748b; cursor:pointer;">&lt;</span>
+                            <span style="color:#fff; cursor:pointer;">&gt;</span>
+                        </div>
+                    </div>
+
+                    <div class="calendar-grid">
+                        <div class="cal-day-name">Su</div><div class="cal-day-name">Mo</div><div class="cal-day-name">Tu</div>
+                        <div class="cal-day-name">We</div><div class="cal-day-name">Th</div><div class="cal-day-name">Fr</div><div class="cal-day-name">Sa</div>
+                        
+                        <!-- Calendar Days (Fake Data) -->
+                        <div class="cal-day disabled">26</div><div class="cal-day disabled">27</div><div class="cal-day disabled">28</div>
+                        <div class="cal-day disabled">29</div><div class="cal-day disabled">30</div><div class="cal-day disabled">31</div><div class="cal-day disabled">1</div>
+                        
+                        <div class="cal-day disabled">2</div><div class="cal-day disabled">3</div><div class="cal-day disabled">4</div>
+                        <div class="cal-day" onclick="selectDate(this)">5</div><div class="cal-day" onclick="selectDate(this)">6</div><div class="cal-day" onclick="selectDate(this)">7</div><div class="cal-day disabled">8</div>
+                        
+                        <div class="cal-day disabled">9</div><div class="cal-day" onclick="selectDate(this)">10</div><div class="cal-day" onclick="selectDate(this)">11</div>
+                        <div class="cal-day" onclick="selectDate(this)">12</div><div class="cal-day" onclick="selectDate(this)">13</div><div class="cal-day" onclick="selectDate(this)">14</div><div class="cal-day disabled">15</div>
+                    </div>
+
+                    <div class="time-slots" id="timeSlots">
+                        <div class="time-slot" onclick="selectTime(this)">10:00 AM</div>
+                        <div class="time-slot" onclick="selectTime(this)">11:30 AM</div>
+                        <div class="time-slot" onclick="selectTime(this)">2:00 PM</div>
+                        <div class="time-slot" onclick="selectTime(this)">4:15 PM</div>
+                    </div>
+                    
+                    <button id="confirmBtn" class="submit-btn" style="display: none; margin-top: var(--sp-6);" onclick="confirmCall()">Confirm Booking</button>
+
+                    <div class="direct-info">
+                        <div class="direct-row">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg>
+                            <span>niyazqadri97@gmail.com</span>
+                        </div>
+                        <div class="direct-row">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            <span>Available M-F, 9am - 5pm</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="navbar-logo">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                        <rect width="32" height="32" rx="8" fill="var(--color-teal)" />
+                        <path d="M9 17c0 3.31 2.69 6 6 6h1c3.31 0 6-2.69 6-6v-3" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" />
+                        <path d="M23 15c0-3.31-2.69-6-6-6h-1c-3.31 0-6 2.69-6 6v3" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round" />
+                    </svg>
+                    <span>UrbanFlow Works</span>
+                </a>
+                <p>Simple, scalable and reliable software — built with intent, not shortcuts.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <div class="footer-links">
+                    <a href="about.html">About</a>
+                    <a href="services.html">Services</a>
+                    <a href="apps.html">Apps</a>
+                    <a href="course.html">Course</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms &amp; Conditions</a>
+                    <a href="account-deletion.html">Account Deletion</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Products</h4>
+                <div class="footer-links">
+                    <a href="apps.html">Niyaz Mocks</a>
+                    <a href="apps.html">More Coming Soon</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 UrbanFlow Works. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="#" aria-label="UrbanFlow Works on GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.48v-1.87c-2.78.62-3.37-1.37-3.37-1.37-.46-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.36 1.11 2.93.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.9-1.3 2.75-1.03 2.75-1.03.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.81-4.58 5.06.36.32.68.94.68 1.9v2.82c0 .26.18.58.69.48A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z" />
+                    </svg>
+                </a>
+                <a href="#" aria-label="UrbanFlow Works on LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2 3.77-2 4.03 0 4.78 2.6 4.78 6v6.3H18v-5.6c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.97V21H10V9z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="js/navbar.js" defer></script>
+    <script src="js/animations.js" defer></script>
+    <script>
+        function submitDiscovery() {
+            const btn = document.getElementById('discoveryBtn');
+            btn.innerHTML = 'Submitting...';
+            setTimeout(() => {
+                btn.classList.add('success');
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;vertical-align:middle;margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg> Request Received!';
+            }, 1200);
+        }
+
+        let selectedDay = null;
+        let selectedSlot = null;
+
+        function selectDate(el) {
+            // Remove active from all days
+            document.querySelectorAll('.cal-day').forEach(d => d.classList.remove('active'));
+            // Add active to clicked
+            el.classList.add('active');
+            selectedDay = el;
+            
+            // Show time slots
+            document.getElementById('timeSlots').classList.add('show');
+            
+            // Reset time slots
+            document.querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected'));
+            selectedSlot = null;
+            document.getElementById('confirmBtn').style.display = 'none';
+        }
+
+        function selectTime(el) {
+            document.querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedSlot = el;
+            document.getElementById('confirmBtn').style.display = 'block';
+        }
+
+        function confirmCall() {
+            const btn = document.getElementById('confirmBtn');
+            btn.innerHTML = 'Booking...';
+            setTimeout(() => {
+                btn.classList.add('success');
+                btn.innerHTML = 'Call Booked! ✓ Check Email';
+            }, 1000);
+        }
+    </script>
 </body>
-
 </html>

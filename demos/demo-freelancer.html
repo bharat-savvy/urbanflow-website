@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex - Digital Designer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --fl-primary: #06b6d4; /* Neon Cyan */
+            --fl-dark: #000000;
+            --fl-bg: #09090b;
+        }
+
+        body { font-family: 'Outfit', sans-serif; margin: 0; background: var(--fl-dark); color: #fff; padding-top: 40px; overflow-x: hidden; }
+
+        .demo-banner { position: fixed; top: 0; left: 0; right: 0; background: #18181b; color: #fff; padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; z-index: 10000; font-size: 14px; font-weight: 600; }
+        .demo-banner a { background: var(--fl-primary); color: #000; text-decoration: none; padding: 4px 12px; border-radius: 4px; }
+
+        .nav { position: absolute; top: 40px; left: 0; right: 0; z-index: 100; padding: 32px 5%; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 28px; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: -1px; }
+        .logo span { color: var(--fl-primary); }
+        .nav-links a { margin-left: 40px; color: #a1a1aa; text-decoration: none; font-weight: 600; transition: color 0.3s; text-transform: uppercase; font-size: 14px; letter-spacing: 2px;}
+        .nav-links a:hover { color: #fff; }
+
+        /* Hero */
+        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 0 5%; background: url('../images/freelancer-hero.png') center/cover no-repeat; }
+        .hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 100%); }
+        .hero-content { position: relative; z-index: 10; max-width: 800px; }
+        
+        .availability { display: inline-flex; align-items: center; gap: 8px; background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3); padding: 8px 16px; border-radius: 100px; color: var(--fl-primary); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 32px; }
+        .availability::before { content: ''; width: 8px; height: 8px; background: var(--fl-primary); border-radius: 50%; box-shadow: 0 0 10px var(--fl-primary); animation: blink 2s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        .hero h1 { font-size: 96px; line-height: 1; font-weight: 900; margin: 0 0 32px 0; letter-spacing: -3px; }
+        .hero h1 span { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.3); }
+        .hero p { font-size: 24px; color: #a1a1aa; font-weight: 300; margin-bottom: 48px; max-width: 600px; line-height: 1.6;}
+        
+        .btn { background: #fff; color: #000; padding: 18px 40px; border-radius: 100px; text-decoration: none; font-weight: 700; font-size: 16px; transition: all 0.3s; display: inline-block;}
+        .btn:hover { background: var(--fl-primary); box-shadow: 0 0 30px rgba(6, 182, 212, 0.4); }
+
+        /* Skills Marquee */
+        .skills-section { border-top: 1px solid #18181b; border-bottom: 1px solid #18181b; padding: 40px 0; background: var(--fl-bg); overflow: hidden; white-space: nowrap; position: relative;}
+        .skills-section::before, .skills-section::after { content: ''; position: absolute; top: 0; width: 200px; height: 100%; z-index: 2; }
+        .skills-section::before { left: 0; background: linear-gradient(to right, var(--fl-bg), transparent); }
+        .skills-section::after { right: 0; background: linear-gradient(to left, var(--fl-bg), transparent); }
+        .marquee { display: inline-block; animation: scroll 20s linear infinite; font-size: 32px; font-weight: 900; color: #27272a; text-transform: uppercase; letter-spacing: 2px;}
+        .marquee span { margin: 0 40px; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Portfolio */
+        .portfolio { padding: 120px 5%; background: var(--fl-bg); }
+        .section-header { margin-bottom: 64px; }
+        .section-header h2 { font-size: 48px; font-weight: 900; margin: 0; letter-spacing: -1px;}
+        .section-header p { color: var(--fl-primary); font-weight: 600; text-transform: uppercase; letter-spacing: 2px;}
+        
+        .p-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .p-card { background: #18181b; border-radius: 24px; padding: 40px; border: 1px solid #27272a; transition: all 0.4s; cursor: pointer; position: relative; overflow: hidden;}
+        .p-card:hover { border-color: var(--fl-primary); transform: translateY(-10px); }
+        .p-card::after { content: '↗'; position: absolute; top: 40px; right: 40px; font-size: 32px; color: #3f3f46; transition: all 0.3s;}
+        .p-card:hover::after { color: var(--fl-primary); transform: translate(5px, -5px);}
+        .p-card h3 { font-size: 32px; margin: 0 0 16px 0; }
+        .p-card p { color: #a1a1aa; font-size: 18px; line-height: 1.6; margin-bottom: 32px; }
+        .tags { display: flex; gap: 12px; }
+        .tag { padding: 6px 16px; border-radius: 100px; background: #27272a; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;}
+
+        /* Process */
+        .process { padding: 120px 5%; background: var(--fl-dark); border-top: 1px solid #18181b;}
+        .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 64px; }
+        .step { border-top: 2px solid #27272a; padding-top: 32px; position: relative; }
+        .step::before { content: ''; position: absolute; top: -5px; left: 0; width: 8px; height: 8px; background: var(--fl-primary); border-radius: 50%; }
+        .step h4 { font-size: 24px; margin: 0 0 16px 0; }
+        .step p { color: #a1a1aa; line-height: 1.6; }
+
+        /* Footer */
+        .footer { padding: 120px 5%; text-align: center; background: var(--fl-primary); color: #000; }
+        .footer h2 { font-size: 80px; font-weight: 900; margin: 0 0 40px 0; letter-spacing: -3px; }
+        .footer .btn { background: #000; color: #fff; }
+        .footer .btn:hover { background: #fff; color: #000; box-shadow: 0 0 30px rgba(0,0,0,0.2);}
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 56px; }
+            .p-grid { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: 1fr; }
+            .footer h2 { font-size: 48px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="demo-banner">
+        <span>UrbanFlow Template: Modern Freelancer</span>
+        <a href="../services.html">Hire Us to Build This</a>
+    </div>
+
+    <nav class="nav">
+        <a href="#" class="logo">Alex<span>.</span></a>
+        <div class="nav-links">
+            <a href="#">Work</a>
+            <a href="#">Process</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="availability">Available for Q3 Projects</div>
+            <h1>Digital<br><span>Experiences</span></h1>
+            <p>I engineer premium interfaces for startups and enterprises that demand absolute perfection.</p>
+            <a href="#" class="btn">View Selected Work</a>
+        </div>
+    </header>
+
+    <div class="skills-section">
+        <div class="marquee">
+            <span>React</span> <span>Next.js</span> <span>Figma</span> <span>Tailwind</span> <span>TypeScript</span> <span>Framer Motion</span> <span>Node.js</span>
+            <!-- Repeat for seamless scrolling -->
+            <span>React</span> <span>Next.js</span> <span>Figma</span> <span>Tailwind</span> <span>TypeScript</span> <span>Framer Motion</span> <span>Node.js</span>
+        </div>
+    </div>
+
+    <section class="portfolio">
+        <div class="section-header">
+            <p>Selected Work</p>
+            <h2>Featured Projects</h2>
+        </div>
+        <div class="p-grid">
+            <div class="p-card">
+                <h3>Nexus Fintech</h3>
+                <p>A complete dashboard redesign for a Series-B fintech startup. Increased user retention by 40%.</p>
+                <div class="tags">
+                    <span class="tag">UI/UX</span>
+                    <span class="tag">React</span>
+                </div>
+            </div>
+            <div class="p-card">
+                <h3>Aura E-Commerce</h3>
+                <p>Headless Shopify storefront for a luxury fashion brand with sub-second page loads.</p>
+                <div class="tags">
+                    <span class="tag">Next.js</span>
+                    <span class="tag">Tailwind</span>
+                </div>
+            </div>
+            <div class="p-card">
+                <h3>Oasis Mobile</h3>
+                <p>Cross-platform wellness application featuring rich micro-animations and native performance.</p>
+                <div class="tags">
+                    <span class="tag">React Native</span>
+                </div>
+            </div>
+            <div class="p-card">
+                <h3>Vanguard AI</h3>
+                <p>Landing page and marketing site for an AI infrastructure provider. Voted Site of the Day.</p>
+                <div class="tags">
+                    <span class="tag">Framer</span>
+                    <span class="tag">Web Design</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="process">
+        <div class="section-header">
+            <p>Methodology</p>
+            <h2>How we build</h2>
+        </div>
+        <div class="process-steps">
+            <div class="step">
+                <h4>01. Discovery</h4>
+                <p>We start by understanding your business goals, target audience, and competitive landscape to form a rock-solid strategy.</p>
+            </div>
+            <div class="step">
+                <h4>02. Design</h4>
+                <p>Iterative wireframing and high-fidelity prototyping in Figma. We refine the UX until it feels perfectly intuitive.</p>
+            </div>
+            <div class="step">
+                <h4>03. Development</h4>
+                <p>Writing clean, scalable code. We focus on performance, accessibility, and pixel-perfect implementation of the design.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <h2>Have an idea?</h2>
+        <a href="#" class="btn">Let's talk about it</a>
+        <p style="margin-top: 60px; font-size: 14px; font-weight: 600;">Demo built by UrbanFlow Works</p>
+    </footer>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const bname = params.get('name');
+    const email = params.get('email');
+    if (bname) {
+        document.title = bname + " - Portfolio";
+        const logo = document.querySelector('.logo');
+        if (logo) logo.innerHTML = bname + '<span>.</span>';
+    }
+    
+    // Add Upsell
+    const upsell = document.createElement('div');
+    upsell.innerHTML = `
+    <div style="background: #111; color: #fff; padding: 80px 20px; text-align: center; font-family: 'Space Grotesk', sans-serif;">
+        <h2 style="font-size: 40px; font-weight: 700; margin-bottom: 16px; letter-spacing: -1px;">Love how your new site looks?</h2>
+        <p style="color: #888; font-size: 18px; margin-bottom: 24px;">This is just a prototype. Let UrbanFlow Works engineer the real thing.</p>
+        ${email ? `<p style="font-size: 14px; margin-bottom: 24px; color:#666;">(We've already sent a copy to <strong style="color:#facc15;">${email}</strong>)</p>` : ''}
+        <a href="../contact.html" target="_parent" style="display:inline-block; background: #facc15; color: #000; padding: 16px 40px; border-radius: 100px; font-weight: 700; text-decoration: none;">Book Your Build</a>
+    </div>`;
+    document.body.appendChild(upsell);
+</script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RapidPlumb - Luxury Plumbing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --pl-primary: #ef4444; /* Emergency Red */
+            --pl-dark: #0f172a;
+            --pl-bg: #f8fafc;
+        }
+
+        body { font-family: 'Inter', sans-serif; margin: 0; background: #fff; color: var(--pl-dark); padding-top: 40px; overflow-x: hidden;}
+
+        .demo-banner { position: fixed; top: 0; left: 0; right: 0; background: #000; color: #fff; padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; z-index: 10000; font-size: 14px; font-weight: 700; }
+        .demo-banner a { background: #14b8a6; color: #fff; text-decoration: none; padding: 4px 12px; border-radius: 4px; }
+
+        /* Hero Split */
+        .split-layout { display: flex; min-height: 90vh; }
+        .content-side { flex: 1; padding: 60px 8%; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
+        .image-side { flex: 1; background: url('../images/plumber-hero.png') center/cover no-repeat; position: relative; clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%); }
+        .image-side::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0,0,0,0.1), rgba(0,0,0,0.4)); }
+
+        .logo { font-size: 32px; font-weight: 900; color: var(--pl-dark); display: flex; align-items: center; gap: 8px; letter-spacing: -1px; margin-bottom: 10vh; }
+        .logo svg { color: var(--pl-primary); }
+
+        h1 { font-size: 72px; line-height: 1; margin: 0 0 24px 0; font-weight: 900; letter-spacing: -2px; }
+        p.hero-p { font-size: 22px; color: #475569; margin-bottom: 48px; line-height: 1.5; max-width: 500px; }
+
+        .btn-emergency {
+            display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+            background: var(--pl-primary); color: #fff; padding: 20px 40px; border-radius: 100px;
+            font-weight: 900; font-size: 20px; text-decoration: none; text-transform: uppercase; letter-spacing: 1px;
+            box-shadow: 0 20px 40px rgba(239, 68, 68, 0.3); animation: pulse-red 2s infinite; transition: transform 0.2s;
+        }
+        .btn-emergency:hover { transform: scale(1.05); }
+
+        @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+
+        /* Process Section */
+        .process { background: var(--pl-dark); color: #fff; padding: 100px 5%; text-align: center; }
+        .process h2 { font-size: 48px; font-weight: 900; margin: 0 0 64px 0; letter-spacing: -1px;}
+        .step-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .step-card { position: relative; }
+        .step-num { font-size: 80px; font-weight: 900; color: rgba(255,255,255,0.05); position: absolute; top: -40px; left: 50%; transform: translateX(-50%); z-index: 0; }
+        .step-content { position: relative; z-index: 1; }
+        .step-icon { width: 80px; height: 80px; background: var(--pl-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; box-shadow: 0 10px 30px rgba(239,68,68,0.3);}
+        .step-content h3 { font-size: 24px; margin: 0 0 16px 0; }
+        .step-content p { color: #94a3b8; line-height: 1.6; }
+
+        /* Services Grid */
+        .services { padding: 100px 5%; background: var(--pl-bg); }
+        .s-header { text-align: center; margin-bottom: 64px; }
+        .s-header h2 { font-size: 48px; font-weight: 900; color: var(--pl-dark); margin: 0; }
+        .s-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto; }
+        .s-card { background: #fff; border-radius: 20px; padding: 40px; border: 1px solid #e2e8f0; transition: transform 0.3s; }
+        .s-card:hover { transform: translateY(-5px); border-color: var(--pl-primary); box-shadow: 0 20px 40px rgba(0,0,0,0.05);}
+        .s-card h3 { font-size: 28px; font-weight: 900; margin: 0 0 16px 0; }
+        .s-card p { color: #64748b; font-size: 18px; line-height: 1.6; margin-bottom: 24px; }
+        .s-list { list-style: none; padding: 0; margin: 0; }
+        .s-list li { display: flex; align-items: center; gap: 12px; font-weight: 700; color: var(--pl-dark); margin-bottom: 12px; }
+        .s-list li svg { color: #10b981; }
+
+        /* FAQ */
+        .faq { padding: 100px 5%; max-width: 800px; margin: 0 auto; }
+        .faq h2 { font-size: 40px; font-weight: 900; text-align: center; margin-bottom: 48px; }
+        .faq-item { border-bottom: 1px solid #e2e8f0; padding: 24px 0; }
+        .faq-item h4 { font-size: 20px; font-weight: 700; margin: 0 0 12px 0; }
+        .faq-item p { color: #64748b; margin: 0; line-height: 1.6; }
+
+        /* Footer */
+        .footer { background: var(--pl-dark); color: #fff; padding: 80px 5% 40px; text-align: center; }
+        .footer h2 { font-size: 48px; font-weight: 900; margin: 0 0 40px 0; }
+        .footer p { color: #94a3b8; margin-top: 40px; font-size: 14px; }
+
+        @media (max-width: 1024px) {
+            .split-layout { flex-direction: column; }
+            .image-side { min-height: 50vh; clip-path: none; order: 1; }
+            .content-side { order: 2; padding: 40px 5%; text-align: center; align-items: center; }
+            .logo { margin-bottom: 40px; justify-content: center; }
+            h1 { font-size: 56px; }
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 40px; }
+            .btn-emergency {
+                padding: 16px 24px;
+                font-size: 16px;
+                width: 100%;
+                max-width: 320px;
+            }
+            .footer { padding-bottom: 100px; }
+            .mobile-cta { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 16px; z-index: 1000; display: flex; justify-content: center; box-sizing: border-box; border-top: 1px solid #e2e8f0; }
+            .mobile-cta .btn-emergency { width: 100%; text-align: center; font-size: 16px; padding: 14px; box-sizing: border-box; white-space: normal; animation: pulse-red 2s infinite; }
+        }
+        @media (min-width: 769px) { .mobile-cta { display: none; } }
+    </style>
+</head>
+<body>
+
+    <div class="demo-banner">
+        <span>UrbanFlow Template: Luxury Plumber</span>
+        <a href="../services.html">Hire Us to Build This</a>
+    </div>
+
+    <div class="split-layout">
+        <div class="content-side">
+            <div class="logo">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.77z"/></svg>
+                RapidPlumb
+            </div>
+            
+            <h1>Stop the leak.<br>Save your home.</h1>
+            <p class="hero-p">From dripping faucets to luxury bathroom remodels. We arrive fast, quote upfront, and leave your space pristine.</p>
+            
+            <a href="#" class="btn-emergency">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                Dispatch Plumber Now
+            </a>
+        </div>
+        <div class="image-side"></div>
+    </div>
+
+    <section class="process">
+        <h2>How RapidPlumb Works</h2>
+        <div class="step-grid">
+            <div class="step-card">
+                <div class="step-num">01</div>
+                <div class="step-content">
+                    <div class="step-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+                    <h3>1. Make the Call</h3>
+                    <p>Call our 24/7 hotline. A real human answers, takes your details, and gives you immediate mitigation advice to stop water damage.</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <div class="step-num">02</div>
+                <div class="step-content">
+                    <div class="step-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+                    <h3>2. We Dispatch Fast</h3>
+                    <p>Our fully stocked truck is dispatched via GPS. You'll receive a tracking link so you know exactly when the plumber will arrive.</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <div class="step-num">03</div>
+                <div class="step-content">
+                    <div class="step-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                    <h3>3. Fixed Right, Upfront</h3>
+                    <p>We diagnose the issue, provide a flat-rate upfront price, and fix it on the spot. We leave the area cleaner than we found it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="s-header">
+            <h2>Our Expertise</h2>
+        </div>
+        <div class="s-grid">
+            <div class="s-card">
+                <h3>Emergency Repair</h3>
+                <p>Water doesn't wait for business hours. We handle immediate threats to your home's infrastructure.</p>
+                <ul class="s-list">
+                    <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Burst Pipes</li>
+                    <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Overflowing Toilets</li>
+                    <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Gas Leaks</li>
+                </ul>
+            </div>
+            <div class="s-card">
+                <h3>Luxury Upgrades</h3>
+                <p>Turn your bathroom or kitchen into a high-end oasis with premium fixture installations.</p>
+                <ul class="s-list">
+                    <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Rain Shower Systems</li>
+                    <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Freestanding Tubs</li>
+                    <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Smart Toilets</li>
+                </ul>
+            </div>
+            <div class="s-card">
+                <h3>System Overhauls</h3>
+                <p>Modernize your home's unseen infrastructure for better efficiency and water pressure.</p>
+                <ul class="s-list">
+                    <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Tankless Water Heaters</li>
+                    <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Whole Home Repiping</li>
+                    <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Main Sewer Line Replace</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <section class="faq">
+        <h2>Common Questions</h2>
+        <div class="faq-item">
+            <h4>Do you charge an emergency call-out fee?</h4>
+            <p>We charge a flat dispatch fee of $49 which is completely waived if you proceed with the repair work.</p>
+        </div>
+        <div class="faq-item">
+            <h4>How fast can you get here?</h4>
+            <p>For critical emergencies (active flooding, gas leaks), our average response time is under 45 minutes in our main service zones.</p>
+        </div>
+        <div class="faq-item">
+            <h4>Are your plumbers licensed and insured?</h4>
+            <p>Yes. Every RapidPlumb technician is a fully licensed journeyman or master plumber, and our business carries $2M in liability insurance for your protection.</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <h2>Ready to fix it?</h2>
+        <a href="#" class="btn-emergency" style="animation: none;">Call (555) 999-9999</a>
+        <p>Demo Website Template built by UrbanFlow Works. License #PL-100234.</p>
+    </footer>
+
+    <div class="mobile-cta">
+        <a href="#" class="btn-emergency">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Dispatch Plumber Now
+        </a>
+    </div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const bname = params.get('name');
+    const email = params.get('email');
+    if (bname) {
+        document.title = bname + " - Luxury Plumbing";
+        const logo = document.querySelector('.logo');
+        if (logo && logo.lastChild) logo.lastChild.textContent = ' ' + bname;
+    }
+    
+    // Add Upsell
+    const upsell = document.createElement('div');
+    upsell.innerHTML = `
+    <div style="background: #0f172a; color: #fff; padding: 60px 20px; text-align: center; border-top: 1px solid #334155; font-family: 'Inter', sans-serif;">
+        <h2 style="font-size: 32px; font-weight: 900; margin-bottom: 16px; letter-spacing: -1px;">Love how your new site looks?</h2>
+        <p style="color: #94a3b8; font-size: 18px; margin-bottom: 24px;">This is just a prototype. Let UrbanFlow Works engineer the real thing.</p>
+        ${email ? `<p style="font-size: 14px; margin-bottom: 24px; color:#cbd5e1;">(We've already sent a copy to <strong style="color:#ef4444;">${email}</strong>)</p>` : ''}
+        <a href="../contact.html" target="_parent" style="display:inline-block; background: #ef4444; color: #fff; padding: 16px 32px; border-radius: 100px; font-weight: 900; text-decoration: none; box-shadow: 0 10px 20px rgba(239,68,68,0.3);">Book Your Build</a>
+    </div>`;
+    document.body.appendChild(upsell);
+</script>
+</body>
+</html>
